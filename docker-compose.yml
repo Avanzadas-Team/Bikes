@@ -6,13 +6,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - "db"
+      - "client"
   client:
     image: ${DOCKER_REGISTRY-}bikesclient
     build:
       context: .
       dockerfile: ClientApp/Dockerfile
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
     ports:
-      - "4200:4200" 
-      - "49153:49153"
-    volumes:
-      - ./ClientApp:/app 
+      - 8080:8080
