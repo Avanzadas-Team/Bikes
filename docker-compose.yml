@@ -2,18 +2,30 @@ version: '3.4'
 
 services:
   bikes:
-    image: ${DOCKER_REGISTRY-}bikes
+    image: abstractize/bikes
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - "db"
-      - "client"
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
   client:
-    image: ${DOCKER_REGISTRY-}bikesclient
+    image: abstractize/bikesclient
     build:
       context: .
       dockerfile: ClientApp/Dockerfile
+    ports:
+      - "4200:4200" 
+      - "49153:49153"
+    volumes:
+      - ./ClientApp:/app 
+
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
