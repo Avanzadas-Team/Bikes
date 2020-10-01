@@ -15,6 +15,7 @@ services:
       - "443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
   client:
     image: abstractize/bikesclient
     build:
@@ -28,10 +29,18 @@ services:
 
   db:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      - MYSQL_DATABASE=bikes
+      - MYSQL_ROOT_PASSWORD=secret-password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=p455w0rd
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mariadb:/docker-entrypoint-initdb.d:rw
+      - ./mariadb/data:/var/lib/mysql:rw
+
 
   adminer:
     image: adminer
