@@ -10,6 +10,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - DATABASE_STRING=server=db;user id=root;password=p455w0rd;port=3306;database=bikes;
     ports:
       - "80"
       - "443"
@@ -24,6 +25,8 @@ services:
     ports:
       - "4200:4200" 
       - "49153:49153"
+    environment:
+      - SERVER_URL=https://localhost:5001
     volumes:
       - ./ClientApp:/app 
 

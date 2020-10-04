@@ -21,6 +21,9 @@ namespace Bikes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string dbUrl = Environment.GetEnvironmentVariable("SERVER_URL");
+            Console.WriteLine(dbUrl);
             string connect = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AppDB>(opts => opts.UseMySQL(connect));
