@@ -24,8 +24,7 @@ namespace Bikes.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
+        public IEnumerable<WeatherForecast> Get()        {
             return _context.GetSummaries();
         }
     }
