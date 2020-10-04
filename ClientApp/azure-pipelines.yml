@@ -17,11 +17,16 @@ steps:
 
 - script: |
     cd ClientApp
+  displayName: Move to Client App
+- script: |
     npm install -g @angular/cli
+  displayName: 'Install Angular'
+- script: 
     npm install
+  displayName: 'Install'
+- script: 
     ng build --prod
-
-  displayName: 'npm install and build'
+  displayName: 'Build'
   
 - task: ArchiveFiles@2
   inputs:
