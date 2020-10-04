@@ -17,15 +17,19 @@ steps:
 
 - script: |
     cd ClientApp
+    echo $PATH
   displayName: Move to Client App
 - script: |
     npm install -g @angular/cli
+    echo $PATH
   displayName: 'Install Angular'
 - script: 
     npm install
+    echo $PATH
   displayName: 'Install'
 - script: 
     ng build --prod
+    echo $PATH
   displayName: 'Build'
   
 - task: ArchiveFiles@2
