@@ -16,20 +16,19 @@ steps:
   displayName: 'Install Node.js'
 
 - task: Npm@1
-- task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '/ClientApp'
+    workingDir: '$(Build.BinariesDirectory)/ClientApp'
     customCommand: 'npm install -g @angular/cli'
 
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '/ClientApp'
+    workingDir: '$(Build.BinariesDirectory)/ClientApp'
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '/ClientApp'
+    workingDir: '$(Build.BinariesDirectory)/ClientApp'
     customCommand: 'ng build --prod'
   
 - task: ArchiveFiles@2
