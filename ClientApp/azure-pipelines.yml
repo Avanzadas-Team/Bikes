@@ -15,22 +15,22 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    cd ClientApp
-    echo $PATH
-  displayName: Move to Client App
-- script: |
-    npm install -g @angular/cli
-    echo $PATH
-  displayName: 'Install Angular'
-- script: 
-    npm install
-    echo $PATH
-  displayName: 'Install'
-- script: 
-    ng build --prod
-    echo $PATH
-  displayName: 'Build'
+- task: Npm@1
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: '/ClientApp'
+    customCommand: 'npm install -g @angular/cli'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '/ClientApp'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    workingDir: '/ClientApp'
+    customCommand: 'ng build --prod'
   
 - task: ArchiveFiles@2
   inputs:
