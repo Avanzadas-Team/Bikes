@@ -27,20 +27,36 @@ services:
     volumes:
       - ./ClientApp:/app 
 
-  db:
+  masterDB:
     image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     environment:
       - MYSQL_DATABASE=bikes
-      - MYSQL_ROOT_PASSWORD=secret-password
+      - MYSQL_ROOT_PASSWORD=12345
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=p455w0rd
     ports:
       - 3306:3306
     volumes:
       - ./mariadb:/docker-entrypoint-initdb.d:rw
-      - ./mariadb/data:/var/lib/mysql:rw
+      - ./mariadb/data/MYSQLServers/MasterDB:/var/lib/mysql:rw
+      - ./mariadb/data/Scripts/cnf/master:/etc/mysql/conf.d
 
+  slaveDB:
+    image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=p455w0rd
+    ports:
+      - 3307:3306
+    volumes:
+      - ./mariadb:/docker-entrypoint-initdb.d:rw
+      - ./mariadb/data/MYSQLServers/SlaveDB:/var/lib/mysql:rw
+      - ./mariadb/data/Scripts/cnf/slave:/etc/mysql/conf.d
 
   adminer:
     image: adminer
