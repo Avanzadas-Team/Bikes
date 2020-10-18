@@ -30,6 +30,19 @@ services:
     volumes:
       - ./ClientApp:/app 
 
+  admin:
+    image: abstractize/bikesadmin
+    build:
+      context: .
+      dockerfile: AdminApp/Dockerfile
+    ports:
+      - "4300:4300" 
+      - "49150:49150"
+    environment:
+      - SERVER_URL=https://localhost:5001
+    volumes:
+      - ./AdminApp:/app 
+
   masterDB:
     image: mysql
     command: mysqld --default-authentication-plugin=mysql_native_password
