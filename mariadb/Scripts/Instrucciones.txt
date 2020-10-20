@@ -1,0 +1,37 @@
+--- Pasos para configurar los nodos y la replicacion ---
+
+1. En MySQL Workbench crear 3 conexiones para cada nodo
+    - New York :
+                -Port: 3306
+                -username: root
+                -password: 12345
+    - California :
+                -Port: 3307
+                -username: root
+                -password: 12345
+    - Texas :
+                -Port: 3308
+                -username: root
+                -password: 12345
+
+2. Conectarse a New York y ejecutar los scripts de la carpeta NewYork en orden:
+    - TablasNewYork.sql
+    - DBSetup.sql
+    - No cerrar la conexión
+
+3. Conectarse a California y ejecutar los scripts de la carpeta California en orden:
+    - TablasCalifornia.sql
+    - DBSetup.sql
+    - En DBSetup. en la linea 7 se debe insertar entre '' la linea de texto en la columna file que se mostro en New York
+    - En DBSetup. en la linea 8 se debe insertar sin '' la linea de texto en la columna Position que se mostro en New York
+    - En la tabla mostrada verificar que las columnas Slave_IO_Running y Slave_SQL_Running tengan un valor de Yes
+
+4. Conectarse a California y ejecutar los scripts de la carpeta California en orden:
+    - TablasTexas.sql
+    - DBSetup.sql
+    - En DBSetup. en la linea 7 se debe insertar entre '' la linea de texto en la columna file que se mostro en New York
+    - En DBSetup. en la linea 8 se debe insertar sin '' la linea de texto en la columna Position que se mostro en New York
+    - En la tabla mostrada verificar que las columnas Slave_IO_Running y Slave_SQL_Running tengan un valor de Yes
+
+5. Volver a la carpeta NewYork y ejecutar DatosTienda.sql para insertar los datos iniciales en la base de datos.
+

@@ -84,7 +84,7 @@ CREATE TABLE ventas.ordenesTexas (
 );
 
 
-CREATE TABLE ventas.detalleOrdenTexas (
+CREATE TABLE ventas.detalleOrden (
 	idOrden INT,
 	idItem INT,
 	idProducto INT NOT NULL,

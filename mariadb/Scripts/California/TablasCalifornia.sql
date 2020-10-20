@@ -86,7 +86,7 @@ CREATE TABLE ventas.ordenesCalifornia (
 
 
 
-CREATE TABLE ventas.detalleOrdenCalifornia (
+CREATE TABLE ventas.detalleOrden(
 	idOrden INT,
 	idItem INT,
 	idProducto INT NOT NULL,

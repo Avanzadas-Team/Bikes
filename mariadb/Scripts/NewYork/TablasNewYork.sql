@@ -161,7 +161,7 @@ CREATE TABLE ventas.ordenesTexas (
 );
 
 
-CREATE TABLE ventas.detalleOrdenNewYork (
+CREATE TABLE ventas.detalleOrden(
 	idOrden INT,
 	idItem INT,
 	idProducto INT NOT NULL,
@@ -173,29 +173,6 @@ CREATE TABLE ventas.detalleOrdenNewYork (
 	FOREIGN KEY (idProducto) REFERENCES produccion.productos (idProducto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE ventas.detalleOrdenCalifornia (
-	idOrden INT,
-	idItem INT,
-	idProducto INT NOT NULL,
-	cantidad INT NOT NULL,
-	precioVenta DECIMAL (10, 2) NOT NULL,
-	descuento DECIMAL (4, 2) NOT NULL DEFAULT 0,
-	PRIMARY KEY (idOrden, idItem),
-	FOREIGN KEY (idOrden) REFERENCES ventas.ordenes (idOrden) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (idProducto) REFERENCES produccion.productos (idProducto) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE ventas.detalleOrdenTexas (
-	idOrden INT,
-	idItem INT,
-	idProducto INT NOT NULL,
-	cantidad INT NOT NULL,
-	precioVenta DECIMAL (10, 2) NOT NULL,
-	descuento DECIMAL (4, 2) NOT NULL DEFAULT 0,
-	PRIMARY KEY (idOrden, idItem),
-	FOREIGN KEY (idOrden) REFERENCES ventas.ordenes (idOrden) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (idProducto) REFERENCES produccion.productos (idProducto) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 CREATE TABLE produccion.inventarioNewYork (
 	idTienda INT,
