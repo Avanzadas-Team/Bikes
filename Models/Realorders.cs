@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bikes.Models
 {
-    [Table("ordenesTexas")]
-    public partial class OrdenesTexas
+    public partial class Realorders
     {
-        [Key]
         [Column("idOrden")]
         public int IdOrden { get; set; }
         [Column("idCliente")]
@@ -25,18 +23,5 @@ namespace Bikes.Models
         public int IdTienda { get; set; }
         [Column("idEmpleado")]
         public int IdEmpleado { get; set; }
-
-        [ForeignKey(nameof(IdCliente))]
-        [InverseProperty(nameof(Clientes.OrdenesTexas))]
-        public virtual Clientes IdClienteNavigation { get; set; }
-        [ForeignKey(nameof(IdEmpleado))]
-        [InverseProperty(nameof(EmpleadosTexas.OrdenesTexas))]
-        public virtual EmpleadosTexas IdEmpleadoNavigation { get; set; }
-        [ForeignKey(nameof(IdOrden))]
-        [InverseProperty(nameof(Ordenes.OrdenesTexas))]
-        public virtual Ordenes IdOrdenNavigation { get; set; }
-        [ForeignKey(nameof(IdTienda))]
-        [InverseProperty(nameof(TiendaTexas.OrdenesTexas))]
-        public virtual TiendaTexas IdTiendaNavigation { get; set; }
     }
 }
