@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bikes.Models
 {
     public class ordenes
     {
+        [Key]
         public int idOrden { get; set; }
         public int idCliente { get; set; }
         public byte estadoOrden { get; set; }
