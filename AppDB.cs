@@ -45,10 +45,12 @@ namespace Bikes
                     clientsBoughts.Add(cl, 1);
                 }
             }
+
             clientsBoughts.OrderBy(key => key.Value);
 
-            for (int i = 0; i < BESTCLIENTS; i++)
-                newClients.Add(clientsBoughts.ElementAt(i).Key);
+            if(clientsBoughts.Count > 0)
+                for (int i = 0; i < BESTCLIENTS; i++)
+                    newClients.Add(clientsBoughts.ElementAt(i).Key);
 
             return newClients;
         }
