@@ -26,15 +26,18 @@ namespace Bikes.Controllers
         public IEnumerable<KeyValuePair<Clientes,int>> Get()
         {
             Dictionary<Clientes, int> quantitity = new Dictionary<Clientes, int>();
-            List<Clientes> clientes = _context.Clientes.ToList<Clientes>();
+            List<Clientes> clients = _context.Clientes.ToList<Clientes>();
 
-            foreach (Clientes cliente in clientes)
+            foreach (Clientes client in clients)
             {
-                int ordersQuant = cliente.OrdenesCalifornia.Count + cliente.OrdenesNewYork.Count + cliente.OrdenesTexas.Count;
-                quantitity.Add(cliente, ordersQuant);
+                int ordersCA = _context.OrdenesCalifornia.Where(val => val.IdCliente == client.IdCliente).ToList().Count;
+                int ordersNY = _context.OrdenesNewYork.Where(val => val.IdCliente == client.IdCliente).ToList().Count;
+                int ordersTX = _context.OrdenesTexas.Where(val => val.IdCliente == client.IdCliente).ToList().Count;
+                int ordersQuant = ordersCA + ordersNY + ordersTX;
+                quantitity.Add(client, ordersQuant);
             }
 
-            return quantitity;
+            return quantitity.OrderByDescending(k => k.Value).ToList<KeyValuePair<Clientes,int>>();
         }
     }
 }
