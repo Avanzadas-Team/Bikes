@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Bikes.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,18 +14,27 @@ namespace Bikes.Controllers
     public class ClientsController : ControllerBase
     {
         private readonly ILogger<ClientsController> _logger;
-        private readonly AppDB _context;
+        private readonly Ventas _context;
 
-        public ClientsController(ILogger<ClientsController> logger, AppDB context)
+        public ClientsController(ILogger<ClientsController> logger, Ventas context)
         {
             _logger = logger;
             _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<clientes> Get()
+        public IEnumerable<KeyValuePair<Clientes,int>> Get()
         {
-            return _context.GetClients();
+            Dictionary<Clientes, int> quantitity = new Dictionary<Clientes, int>();
+            List<Clientes> clientes = _context.Clientes.ToList<Clientes>();
+
+            foreach (Clientes cliente in clientes)
+            {
+                int ordersQuant = cliente.OrdenesCalifornia.Count + cliente.OrdenesNewYork.Count + cliente.OrdenesTexas.Count;
+                quantitity.Add(cliente, ordersQuant);
+            }
+
+            return quantitity;
         }
     }
 }
