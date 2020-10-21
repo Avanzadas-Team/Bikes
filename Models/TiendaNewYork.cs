@@ -5,31 +5,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bikes.Models
 {
-    [Table("clientes")]
-    public partial class Clientes
+    [Table("tiendaNewYork")]
+    public partial class TiendaNewYork
     {
-        public Clientes()
+        public TiendaNewYork()
         {
-            OrdenesCalifornia = new HashSet<OrdenesCalifornia>();
+            EmpleadosNewYork = new HashSet<EmpleadosNewYork>();
             OrdenesNewYork = new HashSet<OrdenesNewYork>();
-            OrdenesTexas = new HashSet<OrdenesTexas>();
         }
 
         [Key]
-        [Column("idCliente")]
-        public int IdCliente { get; set; }
+        [Column("idTienda")]
+        public int IdTienda { get; set; }
         [Required]
-        [Column("nombre")]
+        [Column("nomTienda")]
         [StringLength(255)]
-        public string Nombre { get; set; }
-        [Required]
-        [Column("apellido")]
-        [StringLength(255)]
-        public string Apellido { get; set; }
+        public string NomTienda { get; set; }
         [Column("telefono")]
         [StringLength(25)]
         public string Telefono { get; set; }
-        [Required]
         [Column("email")]
         [StringLength(255)]
         public string Email { get; set; }
@@ -37,20 +31,18 @@ namespace Bikes.Models
         [StringLength(255)]
         public string Calle { get; set; }
         [Column("ciudad")]
-        [StringLength(50)]
+        [StringLength(255)]
         public string Ciudad { get; set; }
         [Column("estado")]
-        [StringLength(25)]
+        [StringLength(10)]
         public string Estado { get; set; }
         [Column("codPostal")]
         [StringLength(5)]
         public string CodPostal { get; set; }
 
-        [InverseProperty("IdClienteNavigation")]
-        public virtual ICollection<OrdenesCalifornia> OrdenesCalifornia { get; set; }
-        [InverseProperty("IdClienteNavigation")]
+        [InverseProperty("IdTiendaNavigation")]
+        public virtual ICollection<EmpleadosNewYork> EmpleadosNewYork { get; set; }
+        [InverseProperty("IdTiendaNavigation")]
         public virtual ICollection<OrdenesNewYork> OrdenesNewYork { get; set; }
-        [InverseProperty("IdClienteNavigation")]
-        public virtual ICollection<OrdenesTexas> OrdenesTexas { get; set; }
     }
 }

@@ -1,7 +1,5 @@
 use ventas;
 select * FROM detalleOrden;
-
-
 	
 	-- NY
 	select c.idcliente, count(c.idcliente = s.idcliente) as cantidad from clientes c inner join  ordenesNewYork s on c.idcliente = s.idcliente group by c.idcliente;
