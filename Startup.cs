@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Bikes.Models;
 
 namespace Bikes
 {
@@ -26,8 +27,8 @@ namespace Bikes
             Console.WriteLine(dbUrl);
             string connect = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<AppDB>(opts => opts.UseMySQL(connect));
-            services.AddScoped<AppDB>();
+            services.AddDbContext<Ventas>(opts => opts.UseMySQL(connect));
+            services.AddScoped<Ventas>();
             services.AddControllers();
         }
 
