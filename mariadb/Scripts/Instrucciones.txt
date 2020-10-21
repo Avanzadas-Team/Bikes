@@ -1,5 +1,12 @@
 --- Pasos para configurar los nodos y la replicacion ---
 
+Preliminar:
+    -Ingresar a las carpetas mariadb/Scripts/cnf/
+    -Ingresar a la carpeta New York, y verificar que my.cnf tenga la propiedad de read only
+    -Ingresar a la carpeta California, y verificar que my.cnf tenga la propiedad de read only
+    -Ingresar a la carpeta Texas, y verificar que my.cnf tenga la propiedad de read only
+
+
 1. En MySQL Workbench crear 3 conexiones para cada nodo
     - New York :
                 -Port: 3306
@@ -26,7 +33,7 @@
     - En DBSetup. en la linea 8 se debe insertar sin '' la linea de texto en la columna Position que se mostro en New York
     - En la tabla mostrada verificar que las columnas Slave_IO_Running y Slave_SQL_Running tengan un valor de Yes
 
-4. Conectarse a California y ejecutar los scripts de la carpeta California en orden:
+4. Conectarse a Texas y ejecutar los scripts de la carpeta Texas en orden:
     - TablasTexas.sql
     - DBSetup.sql
     - En DBSetup. en la linea 7 se debe insertar entre '' la linea de texto en la columna file que se mostro en New York
