@@ -6,7 +6,7 @@ namespace Bikes.Models
 {
     public partial class Ventas : DbContext
     {
-        public Ventas()
+        public Ventas() : base()
         {
         }
 
@@ -33,8 +33,8 @@ namespace Bikes.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;user id=root;password=12345;port=3306;database=ventas;");
+                string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING");
+                optionsBuilder.UseMySQL(dbUrl);
             }
         }
 
