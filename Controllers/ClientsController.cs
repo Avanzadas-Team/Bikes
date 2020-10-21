@@ -13,6 +13,7 @@ namespace Bikes.Controllers
     [ApiController]
     public class ClientsController : ControllerBase
     {
+        private const byte bestClientsNumber = 3;
         private readonly ILogger<ClientsController> _logger;
         private readonly Ventas _context;
 
@@ -27,6 +28,7 @@ namespace Bikes.Controllers
         {
             Dictionary<Clientes, int> quantitity = new Dictionary<Clientes, int>();
             List<Clientes> clients = _context.Clientes.ToList<Clientes>();
+            List<KeyValuePair<Clientes, int>> vals = new List<KeyValuePair<Clientes, int>>();
 
             foreach (Clientes client in clients)
             {
@@ -37,7 +39,14 @@ namespace Bikes.Controllers
                 quantitity.Add(client, ordersQuant);
             }
 
-            return quantitity.OrderByDescending(k => k.Value).ToList<KeyValuePair<Clientes,int>>();
+            vals = quantitity.OrderByDescending(k => k.Value).ToList<KeyValuePair<Clientes, int>>();
+
+            KeyValuePair<Clientes, int>[] bestClients = new KeyValuePair<Clientes, int>[bestClientsNumber];
+
+            for (byte i = 0; i < bestClientsNumber; i++)
+                bestClients[i] = vals[i];
+
+            return bestClients;
         }
     }
 }
