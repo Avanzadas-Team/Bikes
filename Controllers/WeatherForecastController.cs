@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Bikes.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,7 +21,7 @@ namespace Bikes.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()        {
+        public IEnumerable<WeatherForecast> Get(){
             return _context.GetSummaries();
         }
     }

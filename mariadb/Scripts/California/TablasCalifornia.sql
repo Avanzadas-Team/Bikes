@@ -1,4 +1,4 @@
-
+SHOW GLOBAL VARIABLES LIKE 'server_id';
 -- create schemas
 CREATE SCHEMA produccion;
 
