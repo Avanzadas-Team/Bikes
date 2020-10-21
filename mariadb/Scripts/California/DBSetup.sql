@@ -4,8 +4,8 @@ CHANGE REPLICATION FILTER
 CHANGE MASTER TO MASTER_HOST='NewYorkDB',
     MASTER_USER='repl',
     MASTER_PASSWORD='password',
-    MASTER_LOG_FILE='Inserte el nombre del LOGFile obtenido del Master',
-    MASTER_LOG_POS= Insertar el pos obtenido del master;
+    MASTER_LOG_FILE='d2abc23666dd-bin.000001',
+    MASTER_LOG_POS= 10549;
 
 start slave;
 show slave status;

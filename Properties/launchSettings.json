@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Bikes",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:64905",
       "sslPort": 44358
@@ -29,6 +33,10 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "Docker Compose": {
+      "commandName": "Docker",
+      "launchBrowser": false
     }
   }
 }

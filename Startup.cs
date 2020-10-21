@@ -28,7 +28,7 @@ namespace Bikes
 
             services.AddDbContext<AppDB>(opts => opts.UseMySQL(connect));
             services.AddScoped<AppDB>();
-            services.AddControllersWithViews();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
