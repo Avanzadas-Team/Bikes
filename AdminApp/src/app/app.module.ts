@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ClientBoughtsModule } from './client-boughts/client-boughts.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     ClientBoughtsModule,
     AppRoutingModule
