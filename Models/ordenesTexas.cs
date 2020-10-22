@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Bikes.Models
 {
     [Table("ordenesTexas")]
-    public partial class OrdenesTexas
+    public partial class OrdenesTexas : IOrden
     {
         [Key]
         [Column("idOrden")]

@@ -11,6 +11,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - DATABASE_STRING=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - CITY=NY
     ports:
       - "5000:80"
       - "5001:443"
