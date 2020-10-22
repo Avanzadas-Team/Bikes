@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Bikes.Models;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace Bikes
 {
@@ -21,14 +23,21 @@ namespace Bikes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                  "CorsPolicy",
+                  builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
+            services.AddDbContext<Ventas>();
+            services.AddScoped<Ventas>();
+            services.AddControllers();
 
-            string dbUrl = Environment.GetEnvironmentVariable("SERVER_URL");
-            Console.WriteLine(dbUrl);
-            string connect = Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContext<AppDB>(opts => opts.UseMySQL(connect));
-            services.AddScoped<AppDB>();
-            services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,13 +48,14 @@ namespace Bikes
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseCors();
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

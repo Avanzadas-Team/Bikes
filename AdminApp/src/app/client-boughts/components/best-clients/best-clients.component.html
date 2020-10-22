@@ -1,0 +1,33 @@
+<h1 id="tableLabel">TOP 3 Clients</h1>
+
+<p *ngIf="!clientBoughts"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clientBoughts">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Teléfono</th>
+      <th>Email</th>
+      <th>Calle</th>
+      <th>Ciudad</th>
+      <th>Estado</th>
+      <th>Código Postal</th>
+      <th>Compras</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cl of clientBoughts">
+      <td>{{ cl.key.nombre }}</td>
+      <td>{{ cl.key.apellido }}</td>
+      <td>{{ cl.key.telefono }}</td>
+      <td>{{ cl.key.email }}</td>
+      <td>{{ cl.key.calle }}</td>
+      <td>{{ cl.key.ciudad }}</td>
+      <td>{{ cl.key.estado }}</td>
+      <td>{{ cl.key.codPostal }}</td>
+      <td>{{ cl.value }}</td>
+    </tr>
+  </tbody>
+</table>
+

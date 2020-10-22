@@ -10,10 +10,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - DATABASE_STRING=server=db;user id=root;password=p455w0rd;port=3306;database=bikes;
+      - DATABASE_STRING=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
     ports:
-      - "80"
-      - "443"
+      - "5000:80"
+      - "5001:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
