@@ -1,0 +1,19 @@
+<h1 id="tableLabel">TOP 3 Clients</h1>
+
+<p *ngIf="!clientBoughts"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clientBoughts">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Compras</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cl of clientBoughts">
+      <td>{{ cl.client }}</td>
+      <td>{{ cl.boughts }}</td>
+    </tr>
+  </tbody>
+</table>
+
