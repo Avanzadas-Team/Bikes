@@ -4,7 +4,9 @@ import { Routes } from '@angular/router';
 export default class ClientBoughtsRoutes {
   static routes: Routes = [
     {
-      path: '', component: BestClientsComponent
+      path: '', children: [
+        {path: 'best', component: BestClientsComponent}
+      ]
     }
   ];
 }

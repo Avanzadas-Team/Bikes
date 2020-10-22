@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ClientBought } from '../models/clientBought';
+import { ClientBought } from '../../models/clientBought';
 
 @Component({
   selector: 'app-best-clients',
@@ -16,6 +16,6 @@ export class BestClientsComponent implements OnInit {
     }, error => console.error(error));
   }
   ngOnInit(): void {
-    
+
   }
 }
