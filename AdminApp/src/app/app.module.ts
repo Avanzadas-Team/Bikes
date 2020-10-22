@@ -1,3 +1,4 @@
+import { NavMenuComponent } from './core/components/nav-menu/nav-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientBoughtsModule } from './client-boughts/client-boughts.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +9,8 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavMenuComponent
   ],
   imports: [
     HttpClientModule,
