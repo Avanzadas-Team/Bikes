@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using Bikes.Models;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace Bikes
 {
@@ -22,7 +23,15 @@ namespace Bikes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                  "CorsPolicy",
+                  builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddDbContext<Ventas>();
             services.AddScoped<Ventas>();
             services.AddControllers();
@@ -46,7 +55,7 @@ namespace Bikes
 
             app.UseAuthorization();
 
-            app.UseCors();
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
