@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     BrowserModule,
     ClientBoughtsModule,
+    StoresTotalSalesModule,
     AppRoutingModule
   ],
   providers: [],
