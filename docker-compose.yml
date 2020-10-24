@@ -44,6 +44,19 @@ services:
     volumes:
       - ./AdminApp:/app 
 
+  store-admin:
+    image: abstractize/bikesstoreadmin
+    build:
+      context: .
+      dockerfile: StoreAdminApp/Dockerfile
+    ports:
+      - "4500:4500" 
+      - "49151:49151"
+    environment:
+      - SERVER_URL=https://localhost:5001
+    volumes:
+      - ./StoreAdminApp:/app
+
   NewYorkDB:
     image: mysql
     command: mysqld --default-authentication-plugin=mysql_native_password
