@@ -36,14 +36,14 @@ namespace Bikes.Models
                 try
                 {
                     Console.WriteLine("Connnecting to DB");
-                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING");
+                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING_V");
                     optionsBuilder.UseMySQL(dbUrl);
                 }
                 catch(Exception e)
                 {
                     Console.Error.WriteLine(e);
                     Console.WriteLine("Connnecting to Master DB");
-                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING_NY");
+                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING_NY_V");
                     optionsBuilder.UseMySQL(dbUrl);
                 }
             }

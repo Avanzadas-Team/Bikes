@@ -10,8 +10,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - DATABASE_STRING=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
-      - DATABASE_STRING_NY=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_V=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_NY_V=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_P=server=NewYorkDB;user id=root;password=12345;port=3306;database=produccion;
+      - DATABASE_STRING_NY_P=server=NewYorkDB;user id=root;password=12345;port=3306;database=produccion;
       - CITY=NY
     ports:
       - "5000:80"
