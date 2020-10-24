@@ -33,8 +33,19 @@ namespace Bikes.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING");
-                optionsBuilder.UseMySQL(dbUrl);
+                try
+                {
+                    Console.WriteLine("Connnecting to DB");
+                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING");
+                    optionsBuilder.UseMySQL(dbUrl);
+                }
+                catch(Exception e)
+                {
+                    Console.Error.WriteLine(e);
+                    Console.WriteLine("Connnecting to Master DB");
+                    string dbUrl = Environment.GetEnvironmentVariable("DATABASE_STRING_NY");
+                    optionsBuilder.UseMySQL(dbUrl);
+                }
             }
         }
 
