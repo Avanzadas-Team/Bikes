@@ -14,7 +14,6 @@ export class SalesAmountComponent implements OnInit, OnDestroy {
   compOrders: Order[];
   filtOrders: Order[];
   orders: Order[];
-  id = 0;
   page = 1;
   pageSize = 8;
   collectionSize: number;
@@ -49,8 +48,13 @@ export class SalesAmountComponent implements OnInit, OnDestroy {
       .map((country, i) => ({id: i + 1, ...country}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
-  incrementId()
+
+  calculateAmount(): number
   {
-    return this.id++;
+    let value = 0;
+    this.filtOrders.forEach(
+      order => value += order.precioVenta
+    )
+    return value;
   }
 }
