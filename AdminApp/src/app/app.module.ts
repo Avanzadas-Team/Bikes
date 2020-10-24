@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { AmountSalesModule } from './amount-sales/amount-sales.module';
 import { NavMenuComponent } from './core/components/nav-menu/nav-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientBoughtsModule } from './client-boughts/client-boughts.module';
@@ -24,6 +26,7 @@ import {FormsModule} from '@angular/forms';
     NavMenuComponent
   ],
   imports: [
+    RouterModule,
     HttpClientModule,
     BrowserModule,
     ClientBoughtsModule,
@@ -36,7 +39,7 @@ import {FormsModule} from '@angular/forms';
     MatNativeDateModule,
     MatButtonModule,
     FormsModule
-
+    AmountSalesModule,
   ],
   providers: [
     MatDatepickerModule,

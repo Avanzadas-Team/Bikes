@@ -1,3 +1,4 @@
+import { AmountSalesModule } from './amount-sales/amount-sales.module';
 import { HomepageComponent } from './core/components/homepage/homepage.component';
 import { ClientBoughtsModule } from './client-boughts/client-boughts.module';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'clients', loadChildren: () => ClientBoughtsModule},
   { path: 'total', loadChildren: () => StoresTotalSalesModule},
   { path: 'orders', loadChildren: () => OrdersByClientModule}
+  { path: 'amount', loadChildren: () => AmountSalesModule}
 ];
 
 @NgModule({
