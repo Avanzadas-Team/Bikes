@@ -1,8 +1,6 @@
-import { Store } from './../../../client-boughts/models/store';
 import { TotalSales } from './../../models/totalsales';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-total-sales',
