@@ -11,15 +11,13 @@ import { AppComponent } from './app.component';
 import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrdersByClientModule } from './orders-by-client/orders-by-client.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +38,8 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     FormsModule
     AmountSalesModule,
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     MatDatepickerModule,

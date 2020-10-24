@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SalesAmountHomePageComponent } from './components/sales-amount-home-page/sales-amount-home-page.component';
 import { SalesAmountComponent } from './components/sales-amount/sales-amount.component';
+import { NgbPaginationModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +14,11 @@ import { SalesAmountComponent } from './components/sales-amount/sales-amount.com
   imports: [
     RouterModule,
     CommonModule,
-    AmountSalesRountingModule
+    AmountSalesRountingModule,
+    NgbPaginationModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [SalesAmountHomePageComponent, SalesAmountComponent],
 })

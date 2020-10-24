@@ -1,3 +1,62 @@
-<h1 id="Label">Please Choose a Store</h1>
-<a>{{ store }}</a>
+<p *ngIf="!orders"><em>Loading...</em></p>
 
+<form>
+  <div class="form-group form-inline">
+      Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-striped" *ngIf="orders">
+  <thead>
+    <tr>
+      <th scope="col">Id Order</th>
+      <th scope="col">Product</th>
+      <th scope="col">Product Id</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Client Lastname</th>
+      <th scope="col">Client Name</th>
+      <th scope="col">Client Id</th>
+      <th scope="col">Employee Lastname</th>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Required Date</th>
+      <th scope="col">Send Date</th>
+      <th scope="col">Order State</th>
+      <th scope="col">Discount</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.idOrden}}</td>
+      <td>{{ order.productName}}</td>
+      <td>{{ order.idProducto }}</td>
+      <td>{{ order.cantidad }}</td>
+      <td>{{ order.clienteApellido }}</td>
+      <td>{{ order.clienteNombre }}</td>
+      <td>{{ order.idCliente }}</td>
+      <td>{{ order.empleadoApellido }}</td>
+      <td>{{ order.empleadoNombre }}</td>
+      <td>{{ order.idEmpleado }}</td>
+      <td>{{ order.fechaOrden }}</td>
+      <td>{{ order.requiredDate }}</td>
+      <td>{{ order.fechaEnvio }}</td>
+      <td>{{ order.estadoOrden }}</td>
+      <td>{{ order.descuento }}</td>
+      <td>{{ order.precioVenta }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2" *ngIf="orders">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [rotate]="true"
+    [boundaryLinks]="true" (pageChange)="refresh()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="20">20 items per page</option>
+    <option [ngValue]="30">30 items per page</option>
+  </select>
+</div>

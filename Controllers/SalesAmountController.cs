@@ -25,7 +25,7 @@ namespace Bikes.Controllers
             _producctionContext = pContext;
 
         }
-        [HttpGet]
+        [HttpGet("All")]
         public IEnumerable<Order> GetTotalSales()
         {
             return this.GetTotalSalesCA().Concat(this.GetTotalSalesNY()).Concat(this.GetTotalSalesTX());
