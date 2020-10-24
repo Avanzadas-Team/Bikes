@@ -15,12 +15,15 @@ namespace Bikes.Controllers
     public class SalesAmountController : ControllerBase
     {
         private readonly ILogger<SalesAmountController> _logger;
-        private readonly Ventas _context;
+        private readonly Ventas _ventasContext;
+        private readonly ProduccionContext _producctionContext;
 
-        public SalesAmountController(ILogger<SalesAmountController> logger, Ventas context)
+        public SalesAmountController(ILogger<SalesAmountController> logger, Ventas vContext, ProduccionContext pContext)
         {
             _logger = logger;
-            _context = context;
+            _ventasContext = vContext;
+            _producctionContext = pContext;
+
         }
         [HttpGet]
         public IEnumerable<Order> GetTotalSales()
@@ -30,8 +33,8 @@ namespace Bikes.Controllers
         [HttpGet("NY")]
         public IEnumerable<Order> GetTotalSalesNY()
         {
-            List<Order> orders = _context.OrdenesNewYork.Join(
-                _context.DetalleOrden,
+            var incOrders = _ventasContext.OrdenesNewYork.Join(
+                _ventasContext.DetalleOrden,
                 order => order.IdOrden,
                 detail => detail.IdOrden,
                 (order, detail) => new
@@ -50,10 +53,11 @@ namespace Bikes.Controllers
                     order.IdEmpleado,
                     detail.Descuento
                 }
-                ).Join(_context.Clientes,
+                ).Join(_ventasContext.Clientes,
                 order => order.IdCliente,
                 client => client.IdCliente,
-                (order, client) => new {
+                (order, client) => new
+                {
                     order.IdOrden,
                     order.IdItem,
                     order.IdProducto,
@@ -69,10 +73,11 @@ namespace Bikes.Controllers
                     order.Descuento,
                     client.Nombre,
                     client.Apellido
-                }).Join(_context.EmpleadosNewYork, 
+                }).Join(_ventasContext.EmpleadosNewYork,
                 order => order.IdEmpleado,
                 employee => employee.IdEmpleado,
-                (order, employee) => new Order(
+                (order, employee) => new
+                {
                     order.IdOrden,
                     order.IdItem,
                     order.IdProducto,
@@ -88,16 +93,43 @@ namespace Bikes.Controllers
                     order.Descuento,
                     order.Nombre,
                     order.Apellido,
-                    employee.Nombre,
-                    employee.Apellido
-                )).ToList<Order>();
+                    eNombre = employee.Nombre,
+                    eApellido = employee.Apellido
+                }).ToList();
+
+            List<Order> orders = new List<Order>(); 
+            foreach (var order in incOrders)
+            {
+                Productos product = _producctionContext.Productos.Find(order.IdProducto);
+                        orders.Add(new Order(
+                        order.IdOrden,
+                        order.IdItem,
+                        order.IdProducto,
+                        order.Cantidad,
+                        order.PrecioVenta,
+                        order.IdCliente,
+                        order.EstadoOrden,
+                        order.FechaOrden,
+                        order.RequiredDate,
+                        order.FechaEnvio,
+                        order.IdTienda,
+                        order.IdEmpleado,
+                        order.Descuento,
+                        order.Nombre,
+                        order.Apellido,
+                        order.eNombre,
+                        order.eApellido,
+                        product.NomProducto
+                        )
+                    );
+            }
             return orders;
         }
         [HttpGet("CA")]
         public IEnumerable<Order> GetTotalSalesCA()
         {
-            List<Order> orders = _context.OrdenesCalifornia.Join(
-                _context.DetalleOrden,
+            var incOrders = _ventasContext.OrdenesCalifornia.Join(
+                _ventasContext.DetalleOrden,
                 order => order.IdOrden,
                 detail => detail.IdOrden,
                 (order, detail) => new
@@ -116,7 +148,7 @@ namespace Bikes.Controllers
                     order.IdEmpleado,
                     detail.Descuento
                 }
-                ).Join(_context.Clientes,
+                ).Join(_ventasContext.Clientes,
                 order => order.IdCliente,
                 client => client.IdCliente,
                 (order, client) => new {
@@ -135,10 +167,11 @@ namespace Bikes.Controllers
                     order.Descuento,
                     client.Nombre,
                     client.Apellido
-                }).Join(_context.EmpleadosCalifornia,
+                }).Join(_ventasContext.EmpleadosCalifornia,
                 order => order.IdEmpleado,
                 employee => employee.IdEmpleado,
-                (order, employee) => new Order(
+                (order, employee) => new
+                {
                     order.IdOrden,
                     order.IdItem,
                     order.IdProducto,
@@ -154,16 +187,42 @@ namespace Bikes.Controllers
                     order.Descuento,
                     order.Nombre,
                     order.Apellido,
-                    employee.Nombre,
-                    employee.Apellido
-                )).ToList<Order>();
+                    eNombre = employee.Nombre,
+                    eApellido = employee.Apellido
+                }).ToList();
+            List<Order> orders = new List<Order>();
+            foreach (var order in incOrders)
+            {
+                Productos product = _producctionContext.Productos.Find(order.IdProducto);
+                orders.Add(new Order(
+                order.IdOrden,
+                order.IdItem,
+                order.IdProducto,
+                order.Cantidad,
+                order.PrecioVenta,
+                order.IdCliente,
+                order.EstadoOrden,
+                order.FechaOrden,
+                order.RequiredDate,
+                order.FechaEnvio,
+                order.IdTienda,
+                order.IdEmpleado,
+                order.Descuento,
+                order.Nombre,
+                order.Apellido,
+                order.eNombre,
+                order.eApellido,
+                product.NomProducto
+                )
+            );
+            }
             return orders;
         }
         [HttpGet("TX")]
         public IEnumerable<Order> GetTotalSalesTX()
         {
-            List<Order> orders = _context.OrdenesTexas.Join(
-                _context.DetalleOrden,
+            var incOrders = _ventasContext.OrdenesTexas.Join(
+                _ventasContext.DetalleOrden,
                 order => order.IdOrden,
                 detail => detail.IdOrden,
                 (order, detail) => new
@@ -182,7 +241,7 @@ namespace Bikes.Controllers
                     order.IdEmpleado,
                     detail.Descuento
                 }
-                ).Join(_context.Clientes,
+                ).Join(_ventasContext.Clientes,
                 order => order.IdCliente,
                 client => client.IdCliente,
                 (order, client) => new {
@@ -201,10 +260,11 @@ namespace Bikes.Controllers
                     order.Descuento,
                     client.Nombre,
                     client.Apellido
-                }).Join(_context.EmpleadosTexas,
+                }).Join(_ventasContext.EmpleadosTexas,
                 order => order.IdEmpleado,
                 employee => employee.IdEmpleado,
-                (order, employee) => new Order(
+                (order, employee) => new
+                {
                     order.IdOrden,
                     order.IdItem,
                     order.IdProducto,
@@ -220,9 +280,35 @@ namespace Bikes.Controllers
                     order.Descuento,
                     order.Nombre,
                     order.Apellido,
-                    employee.Nombre,
-                    employee.Apellido
-                )).ToList<Order>();
+                    eNombre = employee.Nombre,
+                    eApellido = employee.Apellido
+                }).ToList();
+            List<Order> orders = new List<Order>();
+            foreach (var order in incOrders)
+            {
+                Productos product = _producctionContext.Productos.Find(order.IdProducto);
+                orders.Add(new Order(
+                order.IdOrden,
+                order.IdItem,
+                order.IdProducto,
+                order.Cantidad,
+                order.PrecioVenta,
+                order.IdCliente,
+                order.EstadoOrden,
+                order.FechaOrden,
+                order.RequiredDate,
+                order.FechaEnvio,
+                order.IdTienda,
+                order.IdEmpleado,
+                order.Descuento,
+                order.Nombre,
+                order.Apellido,
+                order.eNombre,
+                order.eApellido,
+                product.NomProducto
+                )
+            );
+            }
             return orders;
         }
     }

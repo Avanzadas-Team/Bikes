@@ -7,7 +7,7 @@ namespace Bikes.DTO
 {
     public class Order
     {
-        public Order(int idOrden, int idItem, int idProducto, int cantidad, decimal precioVenta, int? idCliente, byte estadoOrden, DateTime fechaOrden, DateTime requiredDate, DateTime? fechaEnvio, int idTienda, int idEmpleado, decimal descuento, string clienteNombre, string clienteApellido, string empleadoNombre, string empleadoApellido)
+        public Order(int idOrden, int idItem, int idProducto, int cantidad, decimal precioVenta, int? idCliente, byte estadoOrden, DateTime fechaOrden, DateTime requiredDate, DateTime? fechaEnvio, int idTienda, int idEmpleado, decimal descuento, string clienteNombre, string clienteApellido, string empleadoNombre, string empleadoApellido, string productName)
         {
             IdOrden = idOrden;
             IdItem = idItem;
@@ -26,6 +26,7 @@ namespace Bikes.DTO
             ClienteApellido = clienteApellido;
             EmpleadoNombre = empleadoNombre;
             EmpleadoApellido = empleadoApellido;
+            ProductName = productName;
         }
 
         public int IdOrden { get; set; }
@@ -45,6 +46,7 @@ namespace Bikes.DTO
         public string ClienteApellido { get; set; }
         public string EmpleadoNombre { get; set; }
         public string EmpleadoApellido { get; set; }
+        public string ProductName { get; set; }
 
     }
 }
