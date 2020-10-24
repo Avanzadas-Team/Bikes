@@ -7,7 +7,7 @@ namespace Bikes.DTO
 {
     public class Order
     {
-        public Order(int idOrden, int idItem, int idProducto, int cantidad, decimal precioVenta, int? idCliente, byte estadoOrden, DateTime fechaOrden, DateTime requiredDate, DateTime? fechaEnvio, int idTienda, int idEmpleado)
+        public Order(int idOrden, int idItem, int idProducto, int cantidad, decimal precioVenta, int? idCliente, byte estadoOrden, DateTime fechaOrden, DateTime requiredDate, DateTime? fechaEnvio, int idTienda, int idEmpleado, decimal descuento, string clienteNombre, string clienteApellido, string empleadoNombre, string empleadoApellido)
         {
             IdOrden = idOrden;
             IdItem = idItem;
@@ -21,6 +21,11 @@ namespace Bikes.DTO
             FechaEnvio = fechaEnvio;
             IdTienda = idTienda;
             IdEmpleado = idEmpleado;
+            Descuento = descuento;
+            ClienteNombre = clienteNombre;
+            ClienteApellido = clienteApellido;
+            EmpleadoNombre = empleadoNombre;
+            EmpleadoApellido = empleadoApellido;
         }
 
         public int IdOrden { get; set; }
@@ -28,6 +33,7 @@ namespace Bikes.DTO
         public int IdProducto { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioVenta { get; set; }
+        public decimal Descuento { get; set; }
         public int? IdCliente { get; set; }
         public byte EstadoOrden { get; set; }
         public DateTime FechaOrden { get; set; }
@@ -35,5 +41,10 @@ namespace Bikes.DTO
         public DateTime? FechaEnvio { get; set; }
         public int IdTienda { get; set; }
         public int IdEmpleado { get; set; }
+        public string ClienteNombre { get; set; }
+        public string ClienteApellido { get; set; }
+        public string EmpleadoNombre { get; set; }
+        public string EmpleadoApellido { get; set; }
+
     }
 }
