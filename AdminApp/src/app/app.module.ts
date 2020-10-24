@@ -7,6 +7,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrdersByClientModule } from './orders-by-client/orders-by-client.module';
+
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -18,9 +28,20 @@ import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.
     BrowserModule,
     ClientBoughtsModule,
     StoresTotalSalesModule,
-    AppRoutingModule
+    OrdersByClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AutocompleteLibModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    FormsModule
+
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
