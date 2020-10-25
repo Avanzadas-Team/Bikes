@@ -34,6 +34,8 @@ namespace Bikes
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddDbContext<Ventas>();
             services.AddScoped<Ventas>();
+            services.AddDbContext<ProduccionContext>();
+            services.AddScoped<ProduccionContext>();
             services.AddControllers();
 
             services.AddControllers().AddNewtonsoftJson(options =>
