@@ -18,4 +18,10 @@ export class HttpService {
   getAvgPbyCltTX(dateS: string, dateF: string) {
     return this.http.get(this.BaseURL + '/avgp/TX/' + dateS + '/' + dateF);
   }
+  getUsers() {
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
+  getCategories() {
+    return this.http.get(this.BaseURL + '/salesbyprod');
+  }
 }

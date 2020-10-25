@@ -9,6 +9,7 @@ import { ClientPurchasesModule } from './client-purchases/client-purchases.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
+import { SalesAmountModule } from './sales-amount/sales-amount.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    SalesAmountModule,
     AuthModule,
     ClientPurchasesModule,
     FormsModule,
