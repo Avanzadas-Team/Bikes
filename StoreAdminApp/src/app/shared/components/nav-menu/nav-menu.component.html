@@ -1,0 +1,30 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" *ngIf="!checkStatus()" [routerLink]="['/']"><i class="fas fa-store"></i> Home</a>
+    <p class="navbar-brand" *ngIf="checkStatus()" >{{ storeName }} <i class="fas fa-store"></i></p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-2">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="checkStatus()" [routerLink]="['Clients-Average']" routerLinkActive="active">Client Purchases <i class="fas fa-file-invoice-dollar"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  *ngIf="checkStatus()" href="#">Sales <i class="fas fa-dollar-sign"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="checkStatus()" href="#">Orders <i class="fas fa-boxes"></i></a>
+        </li>
+        <li class="nav-item" *ngIf="checkStatus()">
+          <a class="nav-link" href="#">Income <i class="fas fa-wallet"></i></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-right mt-2 mt-lg-2">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="checkStatus()" (click)="onLogOut()"  [routerLink]="['/']">Log Out <i class="fas fa-door-open"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
