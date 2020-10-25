@@ -1,6 +1,7 @@
 {
     "*": {
-        "target": "http://localhost:5001",
+        "target": "http://localhost:5001,http://localhost:4300",
+        "changeOrigin" : true,
         "secure": false,
         "logLevel": "debug"
     }

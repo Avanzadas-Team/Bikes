@@ -1,0 +1,113 @@
+<p *ngIf="!orders"><em>Loading...</em></p>
+
+<form class="form-inline">
+  <div class="form-group hidden">
+    <div class="input-group">
+      <input name="datepicker"
+             class="form-control"
+             ngbDatepicker
+             #datepicker="ngbDatepicker"
+             [autoClose]="'outside'"
+             (dateSelect)="onDateSelection($event)"
+             [displayMonths]="2"
+             [dayTemplate]="t"
+             outsideDays="hidden"
+             [startDate]="toNgbDate(startingDate)!">
+      <ng-template #t let-date let-focused="focused">
+        <span class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+      </ng-template>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <input #dpstartingDate
+             class="form-control" placeholder="yyyy-mm-dd"
+             name="dpstartingDate"
+             [value]="formatter.format(toNgbDate(startingDate))"
+             (input)="startingDate = toDate(validateInput(toNgbDate(startingDate), dpstartingDate.value))">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group ml-2">
+    <div class="input-group">
+      <input #dpToDate
+             class="form-control" placeholder="yyyy-mm-dd"
+             name="dpToDate"
+             [value]="formatter.format(toNgbDate(endingDate))"
+             (input)="endingDate = toDate(validateInput(toNgbDate(endingDate), dpToDate.value))">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped" *ngIf="orders">
+  <thead>
+    <tr>
+      <th scope="col">Id Order</th>
+      <th scope="col">Product</th>
+      <th scope="col">Product Id</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Client Lastname</th>
+      <th scope="col">Client Name</th>
+      <th scope="col">Client Id</th>
+      <th scope="col">Employee Lastname</th>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Employee Id</th>
+      <th scope="col">Order Date</th>
+      <th scope="col">Required Date</th>
+      <th scope="col">Send Date</th>
+      <th scope="col">Order State</th>
+      <th scope="col">Discount</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.idOrden}}</td>
+      <td>{{ order.productName}}</td>
+      <td>{{ order.idProducto }}</td>
+      <td>{{ order.cantidad }}</td>
+      <td>{{ order.clienteApellido }}</td>
+      <td>{{ order.clienteNombre }}</td>
+      <td>{{ order.idCliente }}</td>
+      <td>{{ order.empleadoApellido }}</td>
+      <td>{{ order.empleadoNombre }}</td>
+      <td>{{ order.idEmpleado }}</td>
+      <td>{{ order.fechaOrden }}</td>
+      <td>{{ order.requiredDate }}</td>
+      <td>{{ order.fechaEnvio }}</td>
+      <td>{{ order.estadoOrden }}</td>
+      <td>{{ order.descuento }}</td>
+      <td>{{ order.precioVenta }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>TOTAL: </td>
+      <td colspan="3">${{calculateAmount()}}</td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="d-flex justify-content-between p-2" *ngIf="orders">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [rotate]="true"
+    [boundaryLinks]="true" (pageChange)="refresh()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="20">20 items per page</option>
+    <option [ngValue]="30">30 items per page</option>
+  </select>
+</div>
