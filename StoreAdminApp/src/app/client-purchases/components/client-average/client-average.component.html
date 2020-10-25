@@ -25,9 +25,8 @@
   <div class="card-deck" *ngFor="let user of users$" id="userCard">
     <div class="card" id="userCardCont">
         <div class="card-body">
-          <h2 class="card-title"><u> <strong>{{ user.name }}</strong></u> </h2>
-          <h4 class="card-text">Purchases Average: {{ user.email}}</h4>
-          <h4 class="card-text"><small class="text-muted">Total Purchases: {{ user.id}} </small></h4>
+          <h2 class="card-title"><u> <strong>{{ user.clientName }} {{ user.clientLastName }}</strong></u> </h2>
+          <h4 class="card-text">Purchases Average: {{ user.averagePurchases }}</h4>
         </div>
       </div>
   </div>
