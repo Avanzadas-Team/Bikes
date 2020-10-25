@@ -1,3 +1,4 @@
+import { AuthService } from './../../../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
+
+  storeName = '';
 
   ngOnInit(): void {
   }
+
+  checkStatus(): boolean {
+    this.storeName = this.auth.getStore();
+    return this.auth.isLoggedIn();
+  }
+
+  onLogOut() {
+    this.auth.logOut();
+    this.storeName = "Store Name"
+  }
+
+
+
 
 }

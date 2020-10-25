@@ -1,0 +1,32 @@
+
+<div class="row rounded mb-4" id="login-div">
+    <div class="col-md-6 offset-md-3 mt-4">
+        <h1 class="display-1">Log In</h1>
+        <form [formGroup]="LogInForm" (ngSubmit)="onLogIn()">
+            <div >
+                <label for="storeSelector" class=" h5 mt-4"><strong>Select your Store:</strong></label>
+            </div>
+            <div > 
+                <select class="form-control" formControlName="store" id="storeSelector" [(ngModel)]="storeSelected" name="sSelector" required>
+                <option value="" disabled>Choose a store</option>
+                <option *ngFor="let str of Stores" [ngValue]="str">{{str}}</option>
+                </select>
+            </div>
+            <label  class=" h5 mt-4"><strong>Store Manager:</strong></label>        
+            <ng-template [ngIf]="storeSelected == 'New York - Baldwin Bikes'">
+                <p class=" h5 mt-4"> {{ nyAdmin }}</p> 
+            </ng-template>
+            <ng-template [ngIf]="storeSelected == 'California - Santa Cruz Bikes'">
+                <p class=" h5 mt-4"> {{ cAdmin }}</p> 
+            </ng-template>
+            <ng-template [ngIf]="storeSelected == 'Texas - Rowlett Bikes'">
+                <p class=" h5 mt-4"> {{ tAdmin }}</p> 
+            </ng-template>
+
+            <div class="col mb-4"> 
+                <button type="submit" [disabled]="!LogInForm.valid"class="btn btn-larg offset-md-5 mt-4" id="login-btn"><strong>Log In</strong></button>
+            </div>  
+        </form>
+    </div> 
+</div>   
+    

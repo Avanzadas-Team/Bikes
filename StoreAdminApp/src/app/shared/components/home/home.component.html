@@ -1,0 +1,47 @@
+
+<div *ngIf="!checkStatus()">
+<div class="jumbotron jumbotron-fluid" id="jumboH" *ngIf="!checkStatus()">
+    <div class="container">
+        <h1 class="display-4">Welcome Back!</h1>
+        <p class="lead">Please log into the store you work for to continue</p>
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-lg" [routerLink]="['login']" role="button" id="btnH">Log In</a>
+        </p>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card" id="cardH">
+      <img class="card-img-top" src="https://source.unsplash.com/4yfdgmbgBWU/640x480" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Baldwin Bikes</h5>
+        <p class="card-text">For 30 years we have been conquering the hearts of cyclists big and small! In our online store we offer everything you need for your bike. Bicycles, components, training accessories, clothing and care products - we have what you need.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">New York City</small>
+      </div>
+    </div>
+    <div class="card" id="cardH">
+      <img class="card-img-top" src="https://source.unsplash.com/1ow9zrlldJU/640x480" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Santa Cruz Bikes</h5>
+        <p class="card-text">We are the #1 Mountain Bike and Cycling Club in the world, we have the best brands, the best prices and the best service! </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">California</small>
+      </div>
+    </div>
+    <div class="card" id="cardH">
+      <img class="card-img-top" src="https://source.unsplash.com/OrI5O9tuF7w/640x480" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Rowlett Bikes</h5>
+        <p class="card-text">Shop road, mountain and cyclocross bikes. Huge savings on parts, components and accessories! Free shipping on qualifying orders.
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Texas</small>
+      </div>
+    </div>
+  </div>
+</div>
