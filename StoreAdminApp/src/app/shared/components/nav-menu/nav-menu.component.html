@@ -15,19 +15,10 @@
           <a class="nav-link"  *ngIf="checkStatus()"[routerLink]="['SalesByProd']">Sales <i class="fas fa-dollar-sign"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="checkStatus()" [routerLink]="['orders/total']" routerLinkActive="active">Orders by Client<i class="fas fa-file-invoice-dollar"></i></a>
+          <a class="nav-link" *ngIf="checkStatus()" [routerLink]="['orders/total']" routerLinkActive="active">Orders by Client  <i class="fas fa-boxes"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" *ngIf="checkStatus()" [routerLink]="['total/sales']" routerLinkActive="active">Total Sales<i class="fas fa-file-invoice-dollar"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  *ngIf="checkStatus()" href="#">Sales <i class="fas fa-dollar-sign"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="checkStatus()" href="#">Orders <i class="fas fa-boxes"></i></a>
-        </li>
-        <li class="nav-item" *ngIf="checkStatus()">
-          <a class="nav-link" href="#">Income <i class="fas fa-wallet"></i></a>
+          <a class="nav-link" *ngIf="checkStatus()" [routerLink]="['total/sales']" routerLinkActive="active">Total Sales  <i class="fas fa-file-invoice-dollar"></i></a>
         </li>
       </ul>
       <ul class="navbar-nav mr-right mt-2 mt-lg-2">

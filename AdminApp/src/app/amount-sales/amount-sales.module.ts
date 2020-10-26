@@ -6,11 +6,13 @@ import { SalesAmountHomePageComponent } from './components/sales-amount-home-pag
 import { SalesAmountComponent } from './components/sales-amount/sales-amount.component';
 import { NgbPaginationModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProdSalesComponent } from './components/prod-sales/prod-sales.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
-  declarations: [SalesAmountHomePageComponent, SalesAmountComponent],
+  declarations: [SalesAmountHomePageComponent, SalesAmountComponent, ProdSalesComponent],
   imports: [
     RouterModule,
     CommonModule,
@@ -19,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [SalesAmountHomePageComponent, SalesAmountComponent],
 })

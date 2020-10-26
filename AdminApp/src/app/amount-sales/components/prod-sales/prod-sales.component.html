@@ -1,0 +1,70 @@
+<div class="container-fluid jumbotron">
+    <div class="jumbotron" id="jumboSPC">
+        <h1 class="display-4" ><strong>Sales by Product  <i class="fas fa-money-check-alt"></i></strong></h1>
+        <h4 class="lead">Check your sales stats on a specific</h4>
+        <hr class="my-4">
+        <h5>Select a product Category and a date interval.</h5>
+        <br>
+        <form [formGroup]="salesForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div >
+                    <label for="productSelector"><strong>Product:</strong></label>
+                </div>
+                <div class="col"> 
+                    <select class="form-control" formControlName="product" id="productSelector" [(ngModel)]="productSelected" name="pSelector" required>
+                    <option value="" disabled>Choose a product</option>
+                    <option *ngFor="let prod of products$" [ngValue]="prod.id">{{prod.name}}</option>
+                    </select>
+                </div>
+                <div >
+                    <label for="storeSelector"><strong>Store:</strong></label>
+                </div>
+                <div class="col"> 
+                    <select class="form-control" formControlName="store" id="storeSelector" [(ngModel)]="storeSelected" name="sSelector" required>
+                    <option value="" disabled>Choose a store</option>
+                    <option *ngFor="let s of Stores" [ngValue]="s">{{s}}</option>
+                    </select>
+                </div>
+                <div >
+                    <label for="fdate"><strong>From:</strong></label>
+                </div>
+                <div class="col">
+                    <input  class="form-control" formControlName="fDate" id="fdate" type="date" [(ngModel)]="fromDate" name="startDate"  required/>
+                  </div>
+                  <div >
+                    <label for="tdate"><strong>To:</strong></label>
+                </div>
+                  <div class="col">
+                    <input  class="form-control" formControlName="tDate" id="tdate" type="date" [(ngModel)]="toDate" name="EndDate" required/>            
+                  </div>
+                <div class="col"> 
+                    <button type="submit" [disabled]="!salesForm.valid"class="btn" id="submmit"><strong>Submit</strong></button>
+                </div>  
+            </div>
+         </form>
+    </div>
+</div>
+<div class="container-fluid">
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Client ID</th>
+            <th>Price</th>
+            <th>No. of Items</th>
+            <th>Required Date</th>
+            <th>Discount Applied</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of sales$">
+            <td>{{ s.idOrder }}</td>
+            <td>{{s.idClient}}</td>
+            <td>{{ s.price }}</td>
+            <td>{{ s.cant }}</td>
+            <td>{{ s.date }}</td>
+            <td>{{ s.discount }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
