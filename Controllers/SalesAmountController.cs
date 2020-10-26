@@ -362,6 +362,8 @@ namespace Bikes.Controllers
             var ordersNY = (from oNY in _ventasContext.OrdenesNewYork
                             join oD in _ventasContext.DetalleOrden
                             on oNY.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oNY.IdCliente equals c.IdCliente
                             where ((oD.IdProducto == prod) && (oNY.FechaOrden >= iDate && oNY.FechaOrden <= fDate))
                             select new
                             {
@@ -369,6 +371,8 @@ namespace Bikes.Controllers
                                 Price = oD.PrecioVenta,
                                 Cant = oD.Cantidad,
                                 CID = oNY.IdCliente,
+                                CName = c.Nombre,
+                                CLName=c.Apellido,
                                 Date = oNY.RequiredDate,
                                 Discount=oD.Descuento
 
@@ -382,6 +386,8 @@ namespace Bikes.Controllers
                 s.price = order.Price;
                 s.cant = order.Cant;
                 s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
                 s.date = order.Date.Date;
                 s.discount = order.Discount;
                 salesList.Add(s);
@@ -401,6 +407,8 @@ namespace Bikes.Controllers
             var ordersCA = (from oCA in _ventasContext.OrdenesCalifornia
                             join oD in _ventasContext.DetalleOrden
                             on oCA.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oCA.IdCliente equals c.IdCliente
                             where ((oD.IdProducto == prod) && (oCA.FechaOrden >= iDate && oCA.FechaOrden <= fDate))
                             select new
                             {
@@ -408,6 +416,8 @@ namespace Bikes.Controllers
                                 Price = oD.PrecioVenta,
                                 Cant = oD.Cantidad,
                                 CID = oCA.IdCliente,
+                                CName = c.Nombre,
+                                CLName = c.Apellido,
                                 Date = oCA.RequiredDate,
                                 Discount = oD.Descuento
 
@@ -421,6 +431,8 @@ namespace Bikes.Controllers
                 s.price = order.Price;
                 s.cant = order.Cant;
                 s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
                 s.date = order.Date.Date;
                 s.discount = order.Discount;
                 salesList.Add(s);
@@ -440,6 +452,8 @@ namespace Bikes.Controllers
             var ordersTX = (from oTX in _ventasContext.OrdenesTexas
                             join oD in _ventasContext.DetalleOrden
                             on oTX.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oTX.IdCliente equals c.IdCliente
                             where ((oD.IdProducto == prod) && (oTX.FechaOrden >= iDate && oTX.FechaOrden <= fDate))
                             select new
                             {
@@ -447,6 +461,8 @@ namespace Bikes.Controllers
                                 Price = oD.PrecioVenta,
                                 Cant = oD.Cantidad,
                                 CID = oTX.IdCliente,
+                                CName = c.Nombre,
+                                CLName = c.Apellido,
                                 Date = oTX.RequiredDate,
                                 Discount = oD.Descuento
 
@@ -460,6 +476,8 @@ namespace Bikes.Controllers
                 s.price = order.Price;
                 s.cant = order.Cant;
                 s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
                 s.date = order.Date.Date;
                 s.discount = order.Discount;
                 salesList.Add(s);

@@ -50,6 +50,8 @@
           <tr>
             <th>Order ID</th>
             <th>Client ID</th>
+            <th>Client Name</th>
+            <th>Client Last Name</th>
             <th>Price</th>
             <th>No. of Items</th>
             <th>Required Date</th>
@@ -60,6 +62,8 @@
           <tr *ngFor="let s of sales$">
             <td>{{ s.idOrder }}</td>
             <td>{{s.idClient}}</td>
+            <td>{{s.clientName}}</td>
+            <td>{{s.clientLName}}</td>
             <td>{{ s.price }}</td>
             <td>{{ s.cant }}</td>
             <td>{{ s.date }}</td>
