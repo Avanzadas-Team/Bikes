@@ -27,13 +27,6 @@ namespace Bikes.Controllers
             _context = context;
         }
 
-        // GET: api/<AveragePurchasesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<AveragePurchasesController>/11-11-11/11-11-11
         [HttpGet("NY/{dateS}/{dateE}")]
         public List<AveragePurchaseByClient> GetAverageNY(string dateS, string dateE)
@@ -58,23 +51,6 @@ namespace Bikes.Controllers
             return result;
         }
 
-        // POST api/<AveragePurchasesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<AveragePurchasesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AveragePurchasesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
 
         private List<AveragePurchaseByClient> GetNY(string dateS, string dateE)
         {
