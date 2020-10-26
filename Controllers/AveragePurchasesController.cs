@@ -69,7 +69,7 @@ namespace Bikes.Controllers
                                 ID = c.IdCliente,
                                 Name = c.Nombre,
                                 LName= c.Apellido,
-                                Amount = oD.PrecioVenta
+                                Amount = oD.PrecioVenta * oD.Cantidad
 
                             }).ToList();
 
@@ -105,8 +105,7 @@ namespace Bikes.Controllers
                                 ID = c.IdCliente,
                                 Name = c.Nombre,
                                 LName = c.Apellido,
-                                Amount = oD.PrecioVenta
-
+                                Amount = oD.PrecioVenta * oD.Cantidad
                             }).ToList();
 
             var clients = ordersCA.GroupBy(x => x.ID);
@@ -141,8 +140,7 @@ namespace Bikes.Controllers
                                 ID = c.IdCliente,
                                 Name = c.Nombre,
                                 LName = c.Apellido,
-                                Amount = oD.PrecioVenta
-
+                                Amount = oD.PrecioVenta * oD.Cantidad
                             }).ToList();
 
             var clients = ordersTX.GroupBy(x => x.ID);

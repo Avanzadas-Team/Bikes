@@ -1,7 +1,7 @@
-<div class="ng-autocomplete">
-    <h1>Ganacia Total</h1>
+<div class="ng-autocomplete" id="div-body">
+    <h1>Total Income</h1>
     <p>&nbsp;</p>
-    <h1>Seleccione el nombre del Cliente</h1>
+    <h1>Select a Client</h1>
     <ng-autocomplete [data]="clients" [searchKeyword]="keyword" (selected)='selectEvent($event)'
     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
@@ -13,16 +13,16 @@
         <div [innerHTML]="notFound"></div>
     </ng-template>
     <p>&nbsp;</p>
-    <h1>Seleccione la fecha de inicio</h1>
+    <h1>Select an initial date</h1>
     <input matInput [matDatepicker]="picker1" [(ngModel)] = "pickerS">
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
     <p>&nbsp;</p>
-    <h1>Seleccione la fecha final</h1>
+    <h1>Select a last date</h1>
     <input matInput [matDatepicker]="picker2" [(ngModel)] = "pickerE">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2 color="primary"></mat-datepicker>
     <p>&nbsp;</p>
-    <button mat-raised-button color="primary" (click)="getTotal($event)">Buscar</button>
+    <button mat-raised-button color="primary"  id="submmit"(click)="getTotal($event)">Search</button>
     <p>&nbsp;</p>
-    <h1 *ngIf="totalOrders != -1">La cantidad de ordenes del cliente en el periodo seleccionado es: {{totalOrders}}</h1>
+    <h1 *ngIf="totalOrders != -1">The client has made a total of: {{totalOrders}} orders in the selected time period.</h1>
