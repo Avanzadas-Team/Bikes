@@ -1,6 +1,6 @@
 <header>
     <div class="jumbotron" id="jumboSPC">
-        <h1 class="display-4" ><strong>Sales by Product</strong></h1>
+        <h1 class="display-4" ><strong>Sales by Product  <i class="fas fa-money-check-alt"></i></strong></h1>
         <h4 class="lead">Check your sales stats on a specific month by each product category.</h4>
         <hr class="my-4">
         <h5>Select a month and a product Category.</h5>
@@ -43,12 +43,11 @@
 </header>
 
 <div class="container">
-    <div class="card-deck" *ngFor="let user of users$" id="userCard">
+    <div class="card-deck" *ngFor="let prod of products$" id="userCard">
       <div class="card" id="userCardCont">
           <div class="card-body">
-            <h2 class="card-title"><u> <strong>{{ user.name }}</strong></u> </h2>
-            <h4 class="card-text">Purchases Average: {{ user.email}}</h4>
-            <h4 class="card-text"><small class="text-muted">Total Purchases: {{ user.id}} </small></h4>
+            <h2 class="card-title"><u> <strong>{{ prod.pName }}</strong></u> </h2>
+            <h4 class="card-text">Amount made from sales: {{ prod.salesSum}} $</h4>
           </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <header>
     <div class="jumbotron" id="jumboACP">
-        <h1 class="display-4" ><strong>Average Purchases by Client</strong></h1>
+        <h1 class="display-4" ><strong>Average Purchases by Client  <i class="fas fa-users"></i></strong></h1>
         <h4 class="lead">Check your clients averge purchases by date.</h4>
         <hr class="my-4">
         <h5>Select a Start date and a End date to search for the clients data.</h5>
@@ -26,7 +26,7 @@
     <div class="card" id="userCardCont">
         <div class="card-body">
           <h2 class="card-title"><u> <strong>{{ user.clientName }} {{ user.clientLastName }}</strong></u> </h2>
-          <h4 class="card-text">Purchases Average: {{ user.averagePurchases }}</h4>
+          <h4 class="card-text">Purchases Average: {{ user.averagePurchases }} $</h4>
         </div>
       </div>
   </div>

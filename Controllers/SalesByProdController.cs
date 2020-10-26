@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Bikes.Controllers
 {
-    [Route("[controller]")]
+    [Route("sbpc")]
     [ApiController]
     public class SalesByProdController : ControllerBase
     {
@@ -44,12 +44,30 @@ namespace Bikes.Controllers
             return catgList;
         }
 
-        // GET api/<SalesByProdController>/5
-        [HttpGet("{id}/{month}/{year}")]
-        public string Get(int id)
+        // GET sbpc/NY/5/January/2016
+        [HttpGet("NY/{id}/{month}/{year}")]
+        public List<ProductSalesByCtg> GetProdNY(string id, string month, string year)
         {
-            return "value";
+            var result = GetNY(id, month, year);
+            return result;
         }
+
+        // GET sbpc/CA/5/January/2016
+        [HttpGet("CA/{id}/{month}/{year}")]
+        public List<ProductSalesByCtg> GetProdCA(string id, string month, string year)
+        {
+            var result = GetCA(id, month, year);
+            return result;
+        }
+
+        // GET sbpc/TX/5/January/2016
+        [HttpGet("TX/{id}/{month}/{year}")]
+        public List<ProductSalesByCtg> GetProdTX(string id, string month, string year)
+        {
+            var result = GetTX(id, month, year);
+            return result;
+        }
+
 
         // POST api/<SalesByProdController>
         [HttpPost]
@@ -69,6 +87,228 @@ namespace Bikes.Controllers
         {
         }
 
+        private int MonthSelector(string month)
+        {
+            switch (month)
+            {
+                case "January":
+                    return 1;
+                case "February":
+                    return 2;
+                case "March":
+                    return 3;
+                case "April":
+                    return 4;
+                case "May":
+                    return 5;
+                case "June":
+                    return 6;
+                case "July":
+                    return 7;
+                case "August":
+                    return 8;
+                case "September":
+                    return 9;
+                case "October":
+                    return 10;
+                case "November":
+                    return 11;
+                case "December":
+                    return 12;
+                default:
+                    return 0;
+            }
+        }
+
+        private List<string> DateMaker(string month,string year )
+        {
+            List<string> dateList= new List<string>();
+            string sDate = year + "-" + MonthSelector(month) + "-01";
+            string eDate;
+            if (month == "December")
+            {
+                var newYear = (Int16.Parse(year) + 1).ToString();
+                eDate = newYear + "-01-01";
+            }
+            else
+            {
+                eDate = year + "-" + (MonthSelector(month) + 1).ToString() + "-01";
+            }
+
+            dateList.Add(sDate);
+            dateList.Add(eDate);
+            return dateList;
+
+        }
+
+        private List<ProductSalesByCtg> GetNY(string id, string month, string year)
+        {
+            int catg = Int16.Parse(id);
+            var dates = DateMaker(month, year);
+            var iDate = DateTime.Parse(dates.ElementAt(0));
+            var fDate = DateTime.Parse(dates.ElementAt(1));
+
+
+            List<ProductSalesByCtg> prodList = new List<ProductSalesByCtg>();
+
+            var productsByCat = (from prod in _pcontext.Productos
+                                where prod.IdCategoria == catg
+                                select new
+                                {
+                                    ID = prod.IdProducto,
+                                    IDC = prod.IdCategoria,
+                                    Name = prod.NomProducto
+                                }).ToList();
+
+
+            var ordersNY= (from oNY in _context.OrdenesNewYork
+                          join oD in _context.DetalleOrden
+                          on oNY.IdOrden equals oD.IdOrden
+                          where (oNY.FechaOrden >= iDate && oNY.FechaOrden < fDate)
+                          select new
+                          {
+                              IDP= oD.IdProducto,
+                              Price = oD.PrecioVenta
+                          }).ToList();
+
+
+
+            var productsNY = (from p in productsByCat
+                              join o in ordersNY
+                              on p.ID equals o.IDP
+                              select new 
+                              {
+                                  ID = p.ID,
+                                  Name = p.Name,
+                                  Price = o.Price
+                              }).ToList();
+
+            var products = productsNY.GroupBy(x => x.ID);
+
+            foreach (var product in products)
+            {
+                ProductSalesByCtg p = new ProductSalesByCtg();
+                p.pName = product.ElementAt(0).Name;
+                p.salesSum = product.Sum(x => x.Price);
+                prodList.Add(p);
+            }
+
+            return prodList;
+
+        }
+
+
+        private List<ProductSalesByCtg> GetCA(string id, string month, string year)
+        {
+            int catg = Int16.Parse(id);
+            var dates = DateMaker(month, year);
+            var iDate = DateTime.Parse(dates.ElementAt(0));
+            var fDate = DateTime.Parse(dates.ElementAt(1));
+
+
+            List<ProductSalesByCtg> prodList = new List<ProductSalesByCtg>();
+
+            var productsByCat = (from prod in _pcontext.Productos
+                                 where prod.IdCategoria == catg
+                                 select new
+                                 {
+                                     ID = prod.IdProducto,
+                                     IDC = prod.IdCategoria,
+                                     Name = prod.NomProducto
+                                 }).ToList();
+
+
+            var ordersCA = (from oCA in _context.OrdenesCalifornia
+                            join oD in _context.DetalleOrden
+                            on oCA.IdOrden equals oD.IdOrden
+                            where (oCA.FechaOrden >= iDate && oCA.FechaOrden < fDate)
+                            select new
+                            {
+                                IDP = oD.IdProducto,
+                                Price = oD.PrecioVenta
+                            }).ToList();
+
+
+
+            var productsNY = (from p in productsByCat
+                              join o in ordersCA
+                              on p.ID equals o.IDP
+                              select new
+                              {
+                                  ID = p.ID,
+                                  Name = p.Name,
+                                  Price = o.Price
+                              }).ToList();
+
+            var products = productsNY.GroupBy(x => x.ID);
+
+            foreach (var product in products)
+            {
+                ProductSalesByCtg p = new ProductSalesByCtg();
+                p.pName = product.ElementAt(0).Name;
+                p.salesSum = product.Sum(x => x.Price);
+                prodList.Add(p);
+            }
+
+            return prodList;
+
+        }
+
+        private List<ProductSalesByCtg> GetTX(string id, string month, string year)
+        {
+            int catg = Int16.Parse(id);
+            var dates = DateMaker(month, year);
+            var iDate = DateTime.Parse(dates.ElementAt(0));
+            var fDate = DateTime.Parse(dates.ElementAt(1));
+
+
+            List<ProductSalesByCtg> prodList = new List<ProductSalesByCtg>();
+
+            var productsByCat = (from prod in _pcontext.Productos
+                                 where prod.IdCategoria == catg
+                                 select new
+                                 {
+                                     ID = prod.IdProducto,
+                                     IDC = prod.IdCategoria,
+                                     Name = prod.NomProducto
+                                 }).ToList();
+
+
+            var ordersTX = (from oTX in _context.OrdenesTexas
+                            join oD in _context.DetalleOrden
+                            on oTX.IdOrden equals oD.IdOrden
+                            where (oTX.FechaOrden >= iDate && oTX.FechaOrden < fDate)
+                            select new
+                            {
+                                IDP = oD.IdProducto,
+                                Price = oD.PrecioVenta
+                            }).ToList();
+
+
+
+            var productsNY = (from p in productsByCat
+                              join o in ordersTX
+                              on p.ID equals o.IDP
+                              select new
+                              {
+                                  ID = p.ID,
+                                  Name = p.Name,
+                                  Price = o.Price
+                              }).ToList();
+
+            var products = productsNY.GroupBy(x => x.ID);
+
+            foreach (var product in products)
+            {
+                ProductSalesByCtg p = new ProductSalesByCtg();
+                p.pName = product.ElementAt(0).Name;
+                p.salesSum = product.Sum(x => x.Price);
+                prodList.Add(p);
+            }
+
+            return prodList;
+
+        }
 
     }
 }
