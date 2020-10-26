@@ -36,7 +36,7 @@ import {FormsModule} from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
     AmountSalesModule,
     AppRoutingModule,
     NgbModule
