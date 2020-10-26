@@ -1,0 +1,54 @@
+<header>
+    <div class="jumbotron" id="jumboSPC">
+        <h1 class="display-4" ><strong>Sales by Product  <i class="fas fa-money-check-alt"></i></strong></h1>
+        <h4 class="lead">Check your sales stats on a specific month by each product category.</h4>
+        <hr class="my-4">
+        <h5>Select a month and a product Category.</h5>
+        <br>
+        <form [formGroup]="salesForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div >
+                    <label for="categorySelector"><strong>Category:</strong></label>
+                </div>
+                <div class="col"> 
+                    <select class="form-control" formControlName="category" id="categorySelector" [(ngModel)]="categorySelected" name="cSelector" required>
+                    <option value="" disabled>Choose a category</option>
+                    <option *ngFor="let catg of categories$" [ngValue]="catg.idCategory">{{catg.name}}</option>
+                    </select>
+                </div>
+                <div >
+                    <label for="monthSelector"><strong>Month:</strong></label>
+                </div>
+                <div class="col"> 
+                    <select class="form-control" formControlName="month" id="monthSelector" [(ngModel)]="monthSelected" name="mSelector" required>
+                    <option value="" disabled>Choose a month</option>
+                    <option *ngFor="let month of Months" [ngValue]="month">{{month}}</option>
+                    </select>
+                </div>
+                <div >
+                    <label for="monthSelector"><strong>Year:</strong></label>
+                </div>
+                <div class="col"> 
+                    <select class="form-control" formControlName="year" id="yearSelector" [(ngModel)]="yearSelected" name="ySelector" required>
+                    <option value="" disabled>Choose a year</option>
+                    <option *ngFor="let year of Years" [ngValue]="year">{{year}}</option>
+                    </select>
+                </div>
+                <div class="col"> 
+                    <button type="submit" [disabled]="!salesForm.valid"class="btn" id="submmit"><strong>Submit</strong></button>
+                </div>  
+            </div>
+         </form><!-- Form ends -->
+    </div>
+</header>
+
+<div class="container">
+    <div class="card-deck" *ngFor="let prod of products$" id="userCard">
+      <div class="card" id="userCardCont">
+          <div class="card-body">
+            <h2 class="card-title"><u> <strong>{{ prod.pName }}</strong></u> </h2>
+            <h4 class="card-text">Amount made from sales: {{ prod.salesSum}} $</h4>
+          </div>
+        </div>
+    </div>
+  </div>

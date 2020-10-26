@@ -11,9 +11,9 @@ import { ClientPurchasesModule } from './client-purchases/client-purchases.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
+import { SalesAmountModule } from './sales-amount/sales-amount.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    SalesAmountModule,
     AuthModule,
     ClientPurchasesModule,
     FormsModule,
