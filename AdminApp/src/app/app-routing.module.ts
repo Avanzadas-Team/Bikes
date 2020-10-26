@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'clients', loadChildren: () => ClientBoughtsModule},
   { path: 'total', loadChildren: () => StoresTotalSalesModule},
-  { path: 'orders', loadChildren: () => OrdersByClientModule}
+  { path: 'orders', loadChildren: () => OrdersByClientModule},
   { path: 'amount', loadChildren: () => AmountSalesModule}
 ];
 
