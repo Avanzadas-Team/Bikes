@@ -1,3 +1,5 @@
+import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.module';
+import { OrdersByClientModule } from './orders-by-client/orders-by-client.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { SalesAmountModule } from './sales-amount/sales-amount.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { SalesAmountModule } from './sales-amount/sales-amount.module';
     ClientPurchasesModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    OrdersByClientModule,
+    BrowserAnimationsModule,
+    AutocompleteLibModule,
+    StoresTotalSalesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
