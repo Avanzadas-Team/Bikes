@@ -7,11 +7,11 @@ import { StoresTotalSalesModule } from './stores-total-sales/stores-total-sales.
 import { OrdersByClientModule } from './orders-by-client/orders-by-client.module';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent},
-  { path: 'clients', loadChildren: () => ClientBoughtsModule},
-  { path: 'total', loadChildren: () => StoresTotalSalesModule},
-  { path: 'orders', loadChildren: () => OrdersByClientModule}
-  { path: 'amount', loadChildren: () => AmountSalesModule}
+  { path: '', component: HomepageComponent },
+  { path: 'clients', loadChildren: () => ClientBoughtsModule },
+  { path: 'total', loadChildren: () => StoresTotalSalesModule },
+  { path: 'orders', loadChildren: () => OrdersByClientModule },
+  { path: 'amount', loadChildren: () => AmountSalesModule }
 ];
 
 @NgModule({
