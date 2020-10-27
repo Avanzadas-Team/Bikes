@@ -109,20 +109,33 @@ namespace Bikes.Controllers
 
         private ClientDates PostCal(ClientDates clientD)
         {
+            Console.WriteLine(clientD.dateS);
+
             var ordersNY = (from c in _context.Clientes
                             join oNY in _context.OrdenesCalifornia
                             on c.IdCliente equals oNY.IdCliente
-                            where c.IdCliente == clientD.idClient &&
-                            (oNY.FechaOrden >= clientD.dateS && clientD.dateS <= clientD.dateE)
+                            where c.IdCliente == clientD.idClient
                             select new
                             {
+                                OrderId = oNY.IdOrden,
                                 IdCliente = c.IdCliente,
+                                FechasOrden = oNY.FechaOrden,
+                                RequiredDate = oNY.RequiredDate
+
                             }).ToList();
             int totalO = 0;
 
             foreach (var orders in ordersNY)
             {
-                totalO += 1;
+                if (orders.FechasOrden >= clientD.dateS.Date && orders.FechasOrden <= clientD.dateE.Date)
+                {
+                    OrderDet orderTemp = new OrderDet();
+                    orderTemp.OrderId = orders.OrderId;
+                    orderTemp.FechasOrden = orders.FechasOrden;
+                    orderTemp.RequiredDate = orders.RequiredDate;
+                    clientD.orders.Add(orderTemp);
+                    totalO += 1;
+                }
             }
 
             clientD.totalOrders = totalO;
@@ -132,20 +145,33 @@ namespace Bikes.Controllers
 
         private ClientDates PostTX(ClientDates clientD)
         {
+            Console.WriteLine(clientD.dateS);
+
             var ordersNY = (from c in _context.Clientes
                             join oNY in _context.OrdenesTexas
                             on c.IdCliente equals oNY.IdCliente
-                            where c.IdCliente == clientD.idClient &&
-                            (oNY.FechaOrden >= clientD.dateS && clientD.dateS <= clientD.dateE)
+                            where c.IdCliente == clientD.idClient
                             select new
                             {
+                                OrderId = oNY.IdOrden,
                                 IdCliente = c.IdCliente,
+                                FechasOrden = oNY.FechaOrden,
+                                RequiredDate = oNY.RequiredDate
+
                             }).ToList();
             int totalO = 0;
 
             foreach (var orders in ordersNY)
             {
-                totalO += 1;
+                if (orders.FechasOrden >= clientD.dateS.Date && orders.FechasOrden <= clientD.dateE.Date)
+                {
+                    OrderDet orderTemp = new OrderDet();
+                    orderTemp.OrderId = orders.OrderId;
+                    orderTemp.FechasOrden = orders.FechasOrden;
+                    orderTemp.RequiredDate = orders.RequiredDate;
+                    clientD.orders.Add(orderTemp);
+                    totalO += 1;
+                }
             }
 
             clientD.totalOrders = totalO;

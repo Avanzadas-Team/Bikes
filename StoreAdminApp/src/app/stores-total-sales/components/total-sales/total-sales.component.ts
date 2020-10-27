@@ -11,9 +11,21 @@ export class TotalSalesComponent implements OnInit {
 
   public totalSale: TotalSales = {totalSales : 0};
 
+  port : string = "";
 
   constructor(http: HttpClient) {
-    http.get<TotalSales>('https://localhost:5001/' + 'totalsales').subscribe(result => {
+    var storeID = localStorage.getItem('currentStoreID');
+    if(storeID == "1"){
+      this.port = "5001";
+    }
+    if(storeID == "2"){
+      this.port = "5003";
+    }
+    if(storeID == "3"){
+      this.port = "5005";
+    }
+
+    http.get<TotalSales>('https://localhost:' + this.port  + '/' + 'totalsales').subscribe(result => {
       this.totalSale = result;
     }, error => console.error(error));
    }
