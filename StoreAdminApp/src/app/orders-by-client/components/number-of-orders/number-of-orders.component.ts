@@ -2,6 +2,7 @@ import { ClientsID } from './../../models/ClientsID';
 import { Component, OnInit, Inject, ViewEncapsulation} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {MatCalendarCellClassFunction} from '@angular/material/datepicker';
+import { Ordersdet } from '../../models/Ordersdet';
 
 
 
@@ -15,6 +16,8 @@ import {MatCalendarCellClassFunction} from '@angular/material/datepicker';
 export class NumberOfOrdersComponent implements OnInit {
 
   clients : ClientsID[];
+
+  orders : Ordersdet[];
 
   keyword = 'name';
 
@@ -62,10 +65,11 @@ export class NumberOfOrdersComponent implements OnInit {
   }
 
   getTotal(event){
-    this.http.post('https://localhost:5001/' + 'ordersbyclient', {dateS: this.pickerS, dateE: this.pickerE, idClient : this.idClient, totalOrders: this.totalOrders}).subscribe(
+    this.http.post('https://localhost:5001/' + 'ordersbyclient', {dateS: this.pickerS, dateE: this.pickerE, idClient : this.idClient, totalOrders: this.totalOrders, orders: []}).subscribe(
       res=> {
         console.log(res);
         this.totalOrders = res["totalOrders"];
+        this.orders = res["orders"];
       }
     )
   }
