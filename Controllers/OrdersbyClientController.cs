@@ -81,8 +81,11 @@ namespace Bikes.Controllers
                             where c.IdCliente == clientD.idClient
                             select new
                             {
+                                OrderId = oNY.IdOrden,
                                 IdCliente = c.IdCliente,
-                                FechasOrden = oNY.FechaOrden
+                                FechasOrden = oNY.FechaOrden,
+                                RequiredDate = oNY.RequiredDate
+
                             }).ToList();
             int totalO = 0;
 
@@ -90,6 +93,11 @@ namespace Bikes.Controllers
             {
                 if(orders.FechasOrden >= clientD.dateS.Date && orders.FechasOrden <= clientD.dateE.Date)
                 {
+                    OrderDet orderTemp = new OrderDet();
+                    orderTemp.OrderId = orders.OrderId;
+                    orderTemp.FechasOrden = orders.FechasOrden;
+                    orderTemp.RequiredDate = orders.RequiredDate;
+                    clientD.orders.Add(orderTemp);
                     totalO += 1;
                 }
             }

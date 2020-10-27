@@ -25,4 +25,25 @@
     <p>&nbsp;</p>
     <button mat-raised-button color="primary"  id="submmit"(click)="getTotal($event)">Search</button>
     <p>&nbsp;</p>
-    <h1 *ngIf="totalOrders != -1">The client has made a total of: {{totalOrders}} orders in the selected time period.</h1>
+    <table class="table table-striped" *ngIf="orders">
+        <thead>
+          <tr>
+            <th scope="col">Id Order</th>
+            <th scope="col">FechasOrden</th>
+            <th scope="col">RequiredDate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.orderId}}</td>
+            <td>{{ order.fechasOrden}}</td>
+            <td>{{ order.requiredDate }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>TOTAL: </td>
+            <td colspan="3">${{totalOrders}}</td>
+          </tr>
+        </tfoot>
+      </table>
