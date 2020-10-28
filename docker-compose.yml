@@ -60,7 +60,20 @@ services:
       - "5005:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-        
+
+  seller:
+    image: abstractize/seller
+    build:
+        context: .
+        dockerfile: SellerApp/Dockerfile
+    ports:
+      - "4700:4700"
+    environment:
+      - "49152:49152"
+      - SERVER_URL=https://localhost:5001
+    volumes:
+      - ./SellerApp:/app
+
   admin:
     image: abstractize/bikesadmin
     build:
