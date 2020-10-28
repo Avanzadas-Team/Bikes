@@ -61,20 +61,6 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
         
-
-  client:
-    image: abstractize/bikesclient
-    build:
-      context: .
-      dockerfile: ClientApp/Dockerfile
-    ports:
-      - "4200:4200" 
-      - "49153:49153"
-    environment:
-      - SERVER_URL=https://localhost:5001
-    volumes:
-      - ./ClientApp:/app 
-
   admin:
     image: abstractize/bikesadmin
     build:
@@ -145,9 +131,3 @@ services:
       - ./mariadb:/docker-entrypoint-initdb.d:rw
       - ./mariadb/data/MYSQLServers/TexasDB:/var/lib/mysql:rw
       - ./mariadb/Scripts/cnf/Texas:/etc/mysql/conf.d
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
