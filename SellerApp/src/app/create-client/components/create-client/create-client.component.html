@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="ng-autocomplete col-md-6 offset-md-3 mt-4">
+        <h4>Create Client</h4>
+        <h4>Name:</h4>
+        <input  class="form-control" id="quantity" type="number" [(ngModel)] = "name" (input)="name" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>Last Name:</h4>
+        <input class="form-control" id="quantity" type="number" [(ngModel)] = "lname" (input)="lname" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>Email:</h4>
+        <input class="form-control" id="quantity" type="number" [(ngModel)] = "email" (input)="email" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>City:</h4>
+        <input  class="form-control" id="quantity" type="number" [(ngModel)] = "city" (input)="city" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>State:</h4>
+        <input class="form-control" id="quantity" type="number" [(ngModel)] = "state" (input)="state" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>Street:</h4>
+        <input class="form-control" id="quantity" type="number" [(ngModel)] = "street" (input)="street" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <h4>Postal Code:</h4>
+        <input class="form-control" id="quantity" type="number" [(ngModel)] = "postalCode" (input)="postalCode" name="quantity"  required/>
+        <p>&nbsp;</p>
+        <button mat-raised-button color="primary" class="btn btn-dark" (click)="createSell($event)">Crear</button>
+        <p>&nbsp;</p>
+        <h4 *ngIf="create != -1">La orden fue creada con éxito</h4>
+    </div>
+    </div>
