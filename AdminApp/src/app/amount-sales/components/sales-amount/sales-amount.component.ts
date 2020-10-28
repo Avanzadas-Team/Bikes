@@ -39,7 +39,7 @@ export class SalesAmountComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
       let store: string = params['id'];
-      this.http.get<Order[]>(this.baseUrl + 'salesamount/' + store).subscribe(
+      this.http.get<Order[]>(this.baseUrl + 'sa/' + store).subscribe(
         (result) => {
           result.forEach((val) => {
             this.setStartingDate(new Date(val.fechaOrden.toString()));
@@ -130,7 +130,7 @@ export class SalesAmountComponent implements OnInit, OnDestroy {
   }
 
   toNgbDate(date: Date): NgbDate {
-    if(!date)
+    if (!date)
       return null;
     return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDay());
   }

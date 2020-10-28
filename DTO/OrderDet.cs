@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace Bikes.DTO
 {
-    public class ProductID
+    public class OrderDet
     {
-        public string name;
+        public int OrderId;
 
-        public int idProduct;
+        public DateTime FechasOrden;
 
-        public decimal price;
+        public DateTime RequiredDate;
     }
 }

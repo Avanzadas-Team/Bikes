@@ -21,6 +21,47 @@ services:
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
+  bikesCA:
+    image: abstractize/bikes
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - DATABASE_STRING_V=server=CaliforniaDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_NY_V=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_P=server=CaliforniaDB;user id=root;password=12345;port=3306;database=produccion;
+      - DATABASE_STRING_NY_P=server=NewYorkDB;user id=root;password=12345;port=3306;database=produccion;
+      - CITY=CA
+    ports:
+      - "5002:80"
+      - "5003:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  bikesTX:
+    image: abstractize/bikes
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - DATABASE_STRING_V=server=TexasDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_NY_V=server=NewYorkDB;user id=root;password=12345;port=3306;database=ventas;
+      - DATABASE_STRING_P=server=TexasDB;user id=root;password=12345;port=3306;database=produccion;
+      - DATABASE_STRING_NY_P=server=NewYorkDB;user id=root;password=12345;port=3306;database=produccion;
+      - CITY=TX
+    ports:
+      - "5004:80"
+      - "5005:443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+        
+
   client:
     image: abstractize/bikesclient
     build:
@@ -37,15 +78,15 @@ services:
   seller:
     image: abstractize/seller
     build:
-        context: .
-        dockerfile: SellerApp/Dockerfile
+      context: .
+      dockerfile: SellerApp/Dockerfile
     ports:
-      - "4700:4700"
+      - "4700:4700" 
       - "49152:49152"
     environment:
       - SERVER_URL=https://localhost:5001
     volumes:
-      - ./SellerApp:/app
+      - ./SellerApp:/app 
 
   admin:
     image: abstractize/bikesadmin

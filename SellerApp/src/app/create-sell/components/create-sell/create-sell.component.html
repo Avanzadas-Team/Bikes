@@ -1,8 +1,8 @@
 <div class="row">
 <div class="ng-autocomplete col-md-6 offset-md-3 mt-4">
-    <h1>Crear Venta</h1>
+    <h4>Create Sell</h4>
     <p>&nbsp;</p>
-    <h1>Nombre del Cliente</h1>
+    <h4>Client Name</h4>
     <ng-autocomplete [data]="clients" [searchKeyword]="keyword" (selected)='selectEvent($event)'
     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
@@ -14,12 +14,12 @@
         <div [innerHTML]="notFound"></div>
     </ng-template>
     <p>&nbsp;</p>
-    <h1>Fecha de entrega</h1>
+    <h4>Delivery Date</h4>
     <input class="form-control" matInput [matDatepicker]="picker2" [(ngModel)] = "pickerE">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2 color="primary"></mat-datepicker>
     <p>&nbsp;</p>
-    <h1>Nombre del Vendedor</h1>
+    <h4>Seller Name</h4>
     <ng-autocomplete [data]="sellers" [searchKeyword]="keyword" (selected)='selectEventE($event)'
     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
@@ -31,7 +31,7 @@
         <div [innerHTML]="notFound"></div>
     </ng-template>
     <p>&nbsp;</p>
-    <h1>Producto</h1>
+    <h4>Product</h4>
     <ng-autocomplete [data]="products" [searchKeyword]="keyword" (selected)='selectEventP($event)'
     (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
@@ -43,17 +43,17 @@
     <div [innerHTML]="notFound"></div>
     </ng-template>
     <p>&nbsp;</p>
-    <h1>Cantidad:</h1>
+    <h4>Quantity:</h4>
     <input  class="form-control" id="quantity" type="number" [(ngModel)] = "quantity" (input)="quantity" name="quantity"  required/>
     <p>&nbsp;</p>
-    <h1>Precio por Unidad:</h1>
+    <h4>Precio por Unidad:</h4>
     <input class="form-control" id="quantity" type="number" [(ngModel)] = "price" (input)="price" name="quantity"  required/>
     <p>&nbsp;</p>
-    <h1>Descuento:</h1>
+    <h4>Discount:</h4>
     <input class="form-control" id="quantity" type="number" [(ngModel)] = "discount" (input)="price" name="quantity"  required/>
     <p>&nbsp;</p>
-    <button mat-raised-button color="primary" (click)="createSell($event)">Crear</button>
+    <button mat-raised-button color="primary" class="btn btn-dark" (click)="createSell($event)">Crear</button>
     <p>&nbsp;</p>
-    <h1 *ngIf="create != -1">La orden fue creada con éxito</h1>
+    <h4 *ngIf="create != -1">La orden fue creada con éxito</h4>
 </div>
 </div>

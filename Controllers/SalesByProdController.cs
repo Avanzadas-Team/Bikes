@@ -150,7 +150,8 @@ namespace Bikes.Controllers
                           select new
                           {
                               IDP= oD.IdProducto,
-                              Price = oD.PrecioVenta
+                              Price = oD.PrecioVenta,
+                              Cant = oD.Cantidad
                           }).ToList();
 
 
@@ -162,7 +163,8 @@ namespace Bikes.Controllers
                               {
                                   ID = p.ID,
                                   Name = p.Name,
-                                  Price = o.Price
+                                  Price = o.Price,
+                                  Cant = o.Cant
                               }).ToList();
 
             var products = productsNY.GroupBy(x => x.ID);
@@ -171,7 +173,7 @@ namespace Bikes.Controllers
             {
                 ProductSalesByCtg p = new ProductSalesByCtg();
                 p.pName = product.ElementAt(0).Name;
-                p.salesSum = product.Sum(x => x.Price);
+                p.salesSum = (product.Sum(x => x.Cant)) * (product.ElementAt(0).Price);
                 prodList.Add(p);
             }
 
@@ -207,7 +209,8 @@ namespace Bikes.Controllers
                             select new
                             {
                                 IDP = oD.IdProducto,
-                                Price = oD.PrecioVenta
+                                Price = oD.PrecioVenta,
+                                Cant = oD.Cantidad
                             }).ToList();
 
 
@@ -219,7 +222,8 @@ namespace Bikes.Controllers
                               {
                                   ID = p.ID,
                                   Name = p.Name,
-                                  Price = o.Price
+                                  Price = o.Price,
+                                  Cant = o.Cant
                               }).ToList();
 
             var products = productsNY.GroupBy(x => x.ID);
@@ -228,7 +232,7 @@ namespace Bikes.Controllers
             {
                 ProductSalesByCtg p = new ProductSalesByCtg();
                 p.pName = product.ElementAt(0).Name;
-                p.salesSum = product.Sum(x => x.Price);
+                p.salesSum = (product.Sum(x => x.Cant)) * (product.ElementAt(0).Price);
                 prodList.Add(p);
             }
 
@@ -263,7 +267,8 @@ namespace Bikes.Controllers
                             select new
                             {
                                 IDP = oD.IdProducto,
-                                Price = oD.PrecioVenta
+                                Price = oD.PrecioVenta,
+                                Cant = oD.Cantidad
                             }).ToList();
 
 
@@ -275,7 +280,8 @@ namespace Bikes.Controllers
                               {
                                   ID = p.ID,
                                   Name = p.Name,
-                                  Price = o.Price
+                                  Price = o.Price,
+                                  Cant = o.Cant
                               }).ToList();
 
             var products = productsNY.GroupBy(x => x.ID);
@@ -284,7 +290,7 @@ namespace Bikes.Controllers
             {
                 ProductSalesByCtg p = new ProductSalesByCtg();
                 p.pName = product.ElementAt(0).Name;
-                p.salesSum = product.Sum(x => x.Price);
+                p.salesSum = (product.Sum(x => x.Cant))*(product.ElementAt(0).Price);
                 prodList.Add(p);
             }
 

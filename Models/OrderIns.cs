@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bikes.DTO
+namespace Bikes.Models
 {
     public class OrderIns
     {

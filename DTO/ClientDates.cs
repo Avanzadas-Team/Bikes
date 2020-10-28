@@ -14,5 +14,7 @@ namespace Bikes.DTO
         public int idClient;
 
         public int totalOrders;
+
+        public List<OrderDet> orders;
     }
 }

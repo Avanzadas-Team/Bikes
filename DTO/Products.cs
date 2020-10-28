@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Bikes.DTO
 {
-    public class SellersID
+    public class Products
     {
+        public int id;
         public string name;
-
-        public int idEmployee;
     }
 }

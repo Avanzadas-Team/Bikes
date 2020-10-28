@@ -132,8 +132,5 @@
       }
     }
   },
-  "defaultProject": "StoreAdminApp",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "StoreAdminApp"
 }

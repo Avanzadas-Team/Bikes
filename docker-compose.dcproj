@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>e3dd5fca-51e3-491c-a93f-3f2628e706fd</ProjectGuid>
+    <ProjectGuid>b5d4182f-db8e-440a-9eaf-6e751a9e4b3d</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>bikes</DockerServiceName>

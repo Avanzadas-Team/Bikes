@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Bikes.DTO;
 using Bikes.Models;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Bikes.Controllers
 {
-    [Route("[controller]")]
+    [Route("sa")]
     [ApiController]
     public class SalesAmountController : ControllerBase
     {
@@ -310,6 +311,180 @@ namespace Bikes.Controllers
             );
             }
             return orders;
+        }
+
+
+        [HttpGet("prods")]
+        public List<Products> GetProducts()
+        {
+            List<Products> prodList = new List<Products>();
+            
+            foreach (Productos prod in _producctionContext.Productos.ToList())
+            {
+                Products temp = new Products();
+                temp.name = prod.NomProducto;
+                temp.id = prod.IdProducto;
+                prodList.Add(temp);
+            }
+
+            return prodList;
+        }
+
+        [HttpGet("NY/{id}/{dateS}/{dateE}")]
+        public List<SalesAmountByProd> GetSalesNY(string id, string dateS, string dateE)
+        {
+            var result = GetProdNY(id,dateS, dateE);
+            return result;
+        }
+
+        [HttpGet("CA/{id}/{dateS}/{dateE}")]
+        public List<SalesAmountByProd> GetSalesCA(string id, string dateS, string dateE)
+        {
+            var result = GetProdCA(id, dateS, dateE);
+            return result;
+        }
+
+        [HttpGet("TX/{id}/{dateS}/{dateE}")]
+        public List<SalesAmountByProd> GetSalesTX(string id, string dateS, string dateE)
+        {
+            var result = GetProdTX(id, dateS, dateE);
+            return result;
+        }
+
+
+        private List<SalesAmountByProd> GetProdNY(string id, string dateS, string dateE)
+        {
+            int prod = Int16.Parse(id);
+            var iDate = DateTime.Parse(dateS).Date;
+            var fDate = DateTime.Parse(dateE).Date;
+            List<SalesAmountByProd> salesList = new List<SalesAmountByProd>();
+
+            var ordersNY = (from oNY in _ventasContext.OrdenesNewYork
+                            join oD in _ventasContext.DetalleOrden
+                            on oNY.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oNY.IdCliente equals c.IdCliente
+                            where ((oD.IdProducto == prod) && (oNY.FechaOrden >= iDate && oNY.FechaOrden <= fDate))
+                            select new
+                            {
+                                IDO = oNY.IdOrden,
+                                Price = oD.PrecioVenta,
+                                Cant = oD.Cantidad,
+                                CID = oNY.IdCliente,
+                                CName = c.Nombre,
+                                CLName=c.Apellido,
+                                Date = oNY.RequiredDate,
+                                Discount=oD.Descuento
+
+                            }).ToList();
+
+
+            foreach (var order in ordersNY)
+            {
+                SalesAmountByProd s = new SalesAmountByProd();
+                s.idOrder = order.IDO;
+                s.price = order.Price;
+                s.cant = order.Cant;
+                s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
+                s.date = order.Date.Date;
+                s.discount = order.Discount;
+                salesList.Add(s);
+            } 
+
+            return salesList;
+
+        }
+
+        private List<SalesAmountByProd> GetProdCA(string id, string dateS, string dateE)
+        {
+            int prod = Int16.Parse(id);
+            var iDate = DateTime.Parse(dateS).Date;
+            var fDate = DateTime.Parse(dateE).Date;
+            List<SalesAmountByProd> salesList = new List<SalesAmountByProd>();
+
+            var ordersCA = (from oCA in _ventasContext.OrdenesCalifornia
+                            join oD in _ventasContext.DetalleOrden
+                            on oCA.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oCA.IdCliente equals c.IdCliente
+                            where ((oD.IdProducto == prod) && (oCA.FechaOrden >= iDate && oCA.FechaOrden <= fDate))
+                            select new
+                            {
+                                IDO = oCA.IdOrden,
+                                Price = oD.PrecioVenta,
+                                Cant = oD.Cantidad,
+                                CID = oCA.IdCliente,
+                                CName = c.Nombre,
+                                CLName = c.Apellido,
+                                Date = oCA.RequiredDate,
+                                Discount = oD.Descuento
+
+                            }).ToList();
+
+
+            foreach (var order in ordersCA)
+            {
+                SalesAmountByProd s = new SalesAmountByProd();
+                s.idOrder = order.IDO;
+                s.price = order.Price;
+                s.cant = order.Cant;
+                s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
+                s.date = order.Date.Date;
+                s.discount = order.Discount;
+                salesList.Add(s);
+            }
+
+            return salesList;
+
+        }
+
+        private List<SalesAmountByProd> GetProdTX(string id, string dateS, string dateE)
+        {
+            int prod = Int16.Parse(id);
+            var iDate = DateTime.Parse(dateS).Date;
+            var fDate = DateTime.Parse(dateE).Date;
+            List<SalesAmountByProd> salesList = new List<SalesAmountByProd>();
+
+            var ordersTX = (from oTX in _ventasContext.OrdenesTexas
+                            join oD in _ventasContext.DetalleOrden
+                            on oTX.IdOrden equals oD.IdOrden
+                            join c in _ventasContext.Clientes
+                            on oTX.IdCliente equals c.IdCliente
+                            where ((oD.IdProducto == prod) && (oTX.FechaOrden >= iDate && oTX.FechaOrden <= fDate))
+                            select new
+                            {
+                                IDO = oTX.IdOrden,
+                                Price = oD.PrecioVenta,
+                                Cant = oD.Cantidad,
+                                CID = oTX.IdCliente,
+                                CName = c.Nombre,
+                                CLName = c.Apellido,
+                                Date = oTX.RequiredDate,
+                                Discount = oD.Descuento
+
+                            }).ToList();
+
+
+            foreach (var order in ordersTX)
+            {
+                SalesAmountByProd s = new SalesAmountByProd();
+                s.idOrder = order.IDO;
+                s.price = order.Price;
+                s.cant = order.Cant;
+                s.idClient = (int)order.CID;
+                s.clientName = order.CName;
+                s.clientLName = order.CLName;
+                s.date = order.Date.Date;
+                s.discount = order.Discount;
+                salesList.Add(s);
+            }
+
+            return salesList;
+
         }
     }
 }
