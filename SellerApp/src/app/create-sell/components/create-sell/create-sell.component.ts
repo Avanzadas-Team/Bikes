@@ -39,7 +39,9 @@ export class CreateSellComponent implements OnInit {
   
   price : number = 0;
 
-  discount : number = 0;
+  discount: number = 0;
+
+  port: string = "";
 
   create: number = -1;
 
@@ -53,31 +55,40 @@ export class CreateSellComponent implements OnInit {
   }
 
   constructor(private http: HttpClient,
-    private auth: AuthService) { 
+    private auth: AuthService) {
+    if (this.auth.getStoreID() == "1") {
+      this.port = "5001";
+    }
+    if (this.auth.getStoreID() == "2") {
+      this.port = "5003";
+    }
+    if (this.auth.getStoreID() == "3") {
+      this.port = "5005";
+    }
 
-    this.http.get<ClientsID[]>('https://localhost:5001/' + 'ordersbyclient').subscribe(result => {
+    this.http.get<ClientsID[]>('https://localhost:' + this.port + '/ordersbyclient').subscribe(result => {
       this.clients = result;
     }, error => console.error(error));
 
-    this.http.get<ProducID[]>('https://localhost:5001/' + 'product').subscribe(result => {
+    this.http.get<ProducID[]>('https://localhost:5001' + this.port + '/product').subscribe(result => {
       this.products = result;
     }, error => console.error(error));
 
     if (this.auth.getStoreID() == '1') {
-      this.http.get<SellersID[]>('https://localhost:5001/' + 'seller/NY').subscribe(result => {
+      this.http.get<SellersID[]>('https://localhost:5001' + this.port + '/seller/NY').subscribe(result => {
         this.sellers = result;
       }, error => console.error(error));
     }
 
     else if (this.auth.getStoreID() == '2') {
       
-      this.http.get<SellersID[]>('https://localhost:5001/' + 'seller/Cal').subscribe(result => {
+      this.http.get<SellersID[]>('https://localhost:5001' + this.port + '/seller/Cal').subscribe(result => {
         this.sellers = result;
       }, error => console.error(error));
     }
 
     else { 
-      this.http.get<SellersID[]>('https://localhost:5001/' + 'seller/TX').subscribe(result => {
+      this.http.get<SellersID[]>('https://localhost:5001' + this.port + '/seller/TX').subscribe(result => {
         this.sellers = result;
       }, error => console.error(error));
     }

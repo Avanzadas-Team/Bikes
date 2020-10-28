@@ -64,15 +64,15 @@ services:
   seller:
     image: abstractize/seller
     build:
-        context: .
-        dockerfile: SellerApp/Dockerfile
+      context: .
+      dockerfile: SellerApp/Dockerfile
     ports:
       - "4700:4700"
     environment:
       - "49152:49152"
       - SERVER_URL=https://localhost:5001
     volumes:
-      - ./SellerApp:/app
+      - ./SellerApp:/app 
 
   admin:
     image: abstractize/bikesadmin
